@@ -309,7 +309,7 @@
                                 <goals>
                                     <goal>site</goal>
                                 </goals>
-                                <phase>site-deploy</phase>
+                                <phase>site</phase>
                                 <configuration>
                                     <path>maven/${project.version}</path>
                                 </configuration>

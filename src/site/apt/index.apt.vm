@@ -12,17 +12,17 @@ Goals Overview
 
     * {{{./copy-dependencies-mojo.html}${project.artifactId}:copy-dependencies}} copies the dependencies to the lib folder.
 
-    * {{{./compile-mojo.html}${project.artifactId}:compile}} compile your application.
+    * {{{./compile-mojo.html}${project.artifactId}:compile}} compiles your application.
 
-    * {{{./test-mojo.html}${project.artifactId}:test}} test your application.
+    * {{{./test-mojo.html}${project.artifactId}:test}} tests your application.
 
-    * {{{./package-mojo.html}${project.artifactId}:package}} package your application.
+    * {{{./package-mojo.html}${project.artifactId}:package}} packages your application.
 
-    * {{{./clean-mojo.html}${project.artifactId}:clean}} clean the project.
+    * {{{./clean-mojo.html}${project.artifactId}:clean}} cleans the project.
 
     There is also goals not bound to the Maven lifecycle:
 
-    * {{{./run-mojo.html}${project.artifactId}:run}} run the application.
+    * {{{./run-mojo.html}${project.artifactId}:run}} runs the application (ctrl-c to exit).
 
     []
 

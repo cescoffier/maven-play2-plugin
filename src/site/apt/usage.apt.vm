@@ -1,0 +1,72 @@
+------
+Usage
+------
+
+Usage
+
+    Before starting, be sure to have defined the <<<PLAY2_HOME>>> system variable used by the plugin to find the Play 2
+    SDK. The packaging of your project must be <<<play2>>>.
+
++---+
+export PLAY2_HOME=...
+# or
+mvn clean install -DPLAY2_HOME=...
++---+
+
+    Best practice is to define the version of the Play2 plugin that you want to use in either your <<<pom.xml>>>
+or a parent <<<pom.xml>>>.
+
++---+
+<project>
+    [...]
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>${project.artifactId}</artifactId>
+                    <version>${project.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+    [...]
+</project>
++---+
+
+    To use the maven-play2-plugin Plugin, you need to add the following configuration to
+your <<<pom.xml>>>
+
++---+
+<project>
+    [...]
+    <packaging>play2</packaging>
+    [...]
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>${project.artifactId}</artifactId>
+                <version>${project.version}</version>
+            </plugin>
+        </plugins>
+    </build>
+    [...]
+</project>
++---+
+
+    The maven-play2-plugin Plugin is invoked during the:
+
+    * <<<process-resources>>> phase : copy dependencies to the <<<lib>>> directory
+
+    * <<<compile>>> phase: compile the play 2 application
+
+    * <<<test>>> phase: run tests
+
+    * <<<package>>> phase: build the application package
+
+    A full run, execute all those steps:
+
++---+
+mvn clean install
++---+

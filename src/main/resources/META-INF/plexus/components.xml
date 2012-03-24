@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component-set>
+    <components>
+        <component>
+            <role>org.apache.maven.lifecycle.mapping.LifecycleMapping</role>
+            <role-hint>play2</role-hint>
+            <implementation>
+                org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping
+            </implementation>
+            <configuration>
+                <phases>
+                    <clean>
+                        de.akquinet.innovation.play2:maven-play2-plugin:clean,
+                        org.apache.maven.plugins:maven-clean-plugin:clean
+                    </clean>
+                    <process-resources>
+                        org.apache.maven.plugins:maven-resources-plugin:resources,
+                        de.akquinet.innovation.play2:maven-play2-plugin:copy-dependencies
+                    </process-resources>
+                    <compile>
+                        de.akquinet.innovation.play2:maven-play2-plugin:compile
+                    </compile>
+                    <process-test-resources>
+                        org.apache.maven.plugins:maven-resources-plugin:testResources
+                    </process-test-resources>
+                    <test>de.akquinet.innovation.play2:maven-play2-plugin:test</test>
+                    <package>
+                        de.akquinet.innovation.play2:maven-play2-plugin:package
+                    </package>
+                    <install>
+                        org.apache.maven.plugins:maven-install-plugin:install
+                    </install>
+                    <deploy>org.apache.maven.plugins:maven-deploy-plugin:deploy</deploy>
+                </phases>
+            </configuration>
+        </component>
+
+        <component>
+            <role>org.apache.maven.artifact.handler.ArtifactHandler</role>
+            <role-hint>play2</role-hint>
+            <implementation>org.apache.maven.artifact.handler.DefaultArtifactHandler</implementation>
+            <configuration>
+                <extension>zip</extension>
+                <type>zip</type>
+                <language>java</language>
+            </configuration>
+        </component>
+    </components>
+</component-set>

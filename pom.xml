@@ -267,7 +267,7 @@
 
     <scm>
         <connection>scm:git:git@github.com:cescoffier/maven-play2-plugin.git</connection>
-        <url>git@github.com:cescoffier/maven-play2-plugin.git</url>
+        <url>https://github.com/cescoffier/maven-play2-plugin</url>
         <developerConnection>scm:git:git@github.com:cescoffier/maven-play2-plugin.git</developerConnection>
     </scm>
 

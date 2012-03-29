@@ -1,0 +1,130 @@
+------
+Quickstart Guide
+------
+
+Quickstart Guide
+
+    This page explains how to use the ${project.artifactId}, and so to build your Play 2 application using Maven.
+
+Prerequisite
+
+    Create a Play 2 application using the _play_ command:
+
++---+
+play new myFirstApp
++---+
+
+    This command has created the Play 2 application. Obviously it's not required if you have an already existing application.
+
+Mavenization
+
+    At the root of the created project, create a _pom.xml_ file with the following content:
+
++---+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    [...]
+    <groupId>your group id</groupId>
+    <artifactId>your artifact id</artifactId>
+    <name>myFirstApp</name>
+
+    <packaging>play2</packaging>
+
+    <dependencies>
+        <!--
+        Add your dependencies here (modules, libraries...).
+        Dependencies in the compile scope will be embedded within the application.
+        -->
+
+
+        <!-- Play Framework Dependencies -->
+        <dependency>
+            <groupId>play</groupId>
+            <artifactId>play_2.9.1</artifactId>
+            <version>2.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>play</groupId>
+            <artifactId>play-test_2.9.1</artifactId>
+            <version>2.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!-- Play source directory -->
+        <sourceDirectory>app</sourceDirectory>
+        <testSourceDirectory>test</testSourceDirectory>
+
+        <plugins>
+            [...]
+
+            <plugin>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>${project.artifactId}</artifactId>
+                <version>${project.version}</version>
+                <extensions>true</extensions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.1</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+
+        </plugins>
+
+    </build>
+    [...]
+</project>
++---+
+
+    That's it !
+
+Usage
+
+    Before starting, be sure to have defined the <<<PLAY2_HOME>>> system variable used by the plugin to find the Play 2
+    SDK. The packaging of your project must be <<<play2>>>.
+
++---+
+export PLAY2_HOME=...
+# or
+mvn clean install -DPLAY2_HOME=...
++---+
+
+    To build the application, simply run:
+
++---+
+mvn clean install
++---+
+
+    To compile and test only:
+
++---+
+mvn test
++---+
+
+    To package the application without running the tests:
+
++---+
+mvn package -DskipTests
++---+
+
+    Finally, to run the application
+
++---+
+mvn play2:run
++---+
+

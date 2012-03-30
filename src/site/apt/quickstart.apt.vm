@@ -4,21 +4,21 @@ Quickstart Guide
 
 Quickstart Guide
 
-    This page explains how to use the ${project.artifactId}, and so to build your Play 2 application using Maven.
+    This page explains how to use the ${project.artifactId} to build your Play 2 application using Maven.
 
-Prerequisite
+Prerequisites
 
-    Create a Play 2 application using the _play_ command:
+    Create a Play 2 application using the <<<play>>> command:
 
 +---+
 play new myFirstApp
 +---+
 
-    This command has created the Play 2 application. Obviously it's not required if you have an already existing application.
+    This command creates the Play 2 application. Obviously it's not required if you already have an existing application.
 
 Mavenization
 
-    At the root of the created project, create a _pom.xml_ file with the following content:
+    At the root of the created project, create a <<<pom.xml>>> file with the following content:
 
 +---+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -95,8 +95,8 @@ Mavenization
 
 Usage
 
-    Before starting, be sure to have defined the <<<PLAY2_HOME>>> system variable used by the plugin to find the Play 2
-    SDK. The packaging of your project must be <<<play2>>>.
+    Before starting, be sure to define the <<<PLAY2_HOME>>> system variable used by the plugin to find the Play 2
+    SDK. As shown in the previous pom file, the packaging of your project must be <<<play2>>>.
 
 +---+
 export PLAY2_HOME=...
@@ -122,7 +122,7 @@ mvn test
 mvn package -DskipTests
 +---+
 
-    Finally, to run the application
+    Finally, to run the application:
 
 +---+
 mvn play2:run

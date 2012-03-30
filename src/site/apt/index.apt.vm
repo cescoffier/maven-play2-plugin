@@ -2,15 +2,15 @@
 Maven Play2 Plugin
 
     The ${project.artifactId} is used to build Play 2 applications using Maven. Basically, it just a wrapper around the <<<play>>>
-command. It supports the application compilation, test and packaging.
+command. It supports compilation, testing and packaging of the application.
 
     []
 
 Goals Overview
 
-    The Play2 Plugin has only several goals included in the <<<play2>>> packaging:
+    The Play2 Plugin acts on projects using the <<<play2>>> packaging type during the following phases:
 
-    * {{{./copy-dependencies-mojo.html}${project.artifactId}:copy-dependencies}} copies the dependencies to the lib folder.
+    * {{{./copy-dependencies-mojo.html}${project.artifactId}:copy-dependencies}} copies the (compile) dependencies to the lib folder.
 
     * {{{./compile-mojo.html}${project.artifactId}:compile}} compiles your application.
 
@@ -20,7 +20,7 @@ Goals Overview
 
     * {{{./clean-mojo.html}${project.artifactId}:clean}} cleans the project.
 
-    There is also goals not bound to the Maven lifecycle:
+    There are also goals not bound to the Maven project lifecycle:
 
     * {{{./run-mojo.html}${project.artifactId}:run}} runs the application (ctrl-c to exit).
 

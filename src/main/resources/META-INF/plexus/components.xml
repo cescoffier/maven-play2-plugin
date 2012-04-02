@@ -25,22 +25,22 @@
             <configuration>
                 <phases>
                     <clean>
-                        de.akquinet.innovation.play2:maven-play2-plugin:clean,
+                        de.akquinet.innovation.play2:play2-maven-plugin:clean,
                         org.apache.maven.plugins:maven-clean-plugin:clean
                     </clean>
                     <process-resources>
                         org.apache.maven.plugins:maven-resources-plugin:resources,
-                        de.akquinet.innovation.play2:maven-play2-plugin:copy-dependencies
+                        de.akquinet.innovation.play2:play2-maven-plugin:copy-dependencies
                     </process-resources>
                     <compile>
-                        de.akquinet.innovation.play2:maven-play2-plugin:compile
+                        de.akquinet.innovation.play2:play2-maven-plugin:compile
                     </compile>
                     <process-test-resources>
                         org.apache.maven.plugins:maven-resources-plugin:testResources
                     </process-test-resources>
-                    <test>de.akquinet.innovation.play2:maven-play2-plugin:test</test>
+                    <test>de.akquinet.innovation.play2:play2-maven-plugin:test</test>
                     <package>
-                        de.akquinet.innovation.play2:maven-play2-plugin:package
+                        de.akquinet.innovation.play2:play2-maven-plugin:package
                     </package>
                     <install>
                         org.apache.maven.plugins:maven-install-plugin:install

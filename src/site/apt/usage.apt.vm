@@ -34,7 +34,7 @@ or a parent <<<pom.xml>>>.
 </project>
 +---+
 
-    To use the maven-play2-plugin Plugin, you need to add the following configuration to
+    To use the ${project.artifactId} Plugin, you need to add the following configuration to
 your <<<pom.xml>>>
 
 +---+
@@ -56,7 +56,7 @@ your <<<pom.xml>>>
 </project>
 +---+
 
-    The maven-play2-plugin Plugin is invoked during the:
+    The ${project.artifactId} Plugin is invoked during the:
 
     * <<<process-resources>>> phase : copy (compile) dependencies to the <<<lib>>> directory
 

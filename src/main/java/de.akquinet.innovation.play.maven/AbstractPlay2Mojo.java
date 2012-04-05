@@ -35,7 +35,7 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
      * @required
      * @readonly
      */
-    protected MavenProject project;
+    MavenProject project;
 
     /**
      * The maven session.
@@ -44,7 +44,7 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
      * @required
      * @readonly
      */
-    protected MavenSession session;
+    MavenSession session;
 
     /**
      * Maven ProjectHelper.
@@ -52,10 +52,10 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
      * @component
      * @readonly
      */
-    protected MavenProjectHelper projectHelper;
+    MavenProjectHelper projectHelper;
 
 
-    private static final String ENV_PLAY2_HOME = "PLAY2_HOME";
+    public static final String ENV_PLAY2_HOME = "PLAY2_HOME";
 
     public String getPlay2HomeOrThrow() throws MojoExecutionException {
         // First check, system variable        
@@ -78,7 +78,7 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
         String path = getPlay2HomeOrThrow();
         File play2 = new File(path, "play");
         if (! play2.exists()) {
-            play2 = new File(path, "play.exe");
+            play2 = new File(path, "play.bat");
         }
         if (! play2.exists()) {
             throw new MojoExecutionException("Can't find the play executable in " + path);

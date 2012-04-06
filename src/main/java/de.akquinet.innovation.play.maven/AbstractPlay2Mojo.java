@@ -86,6 +86,4 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
         return play2;
     }
 
-
-
 }

@@ -119,7 +119,6 @@ public class CopyDependenciesToLibMojo
         public PlayCopyDependenciesMojo() {
             super();
             project = CopyDependenciesToLibMojo.this.project;
-            System.out.println("Factory : " + factory);
             setFactory(factory);
             setResolver(resolver);
             setArtifactCollector(artifactCollector);

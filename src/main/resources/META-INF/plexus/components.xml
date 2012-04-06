@@ -55,8 +55,8 @@
             <role-hint>play2</role-hint>
             <implementation>org.apache.maven.artifact.handler.DefaultArtifactHandler</implementation>
             <configuration>
-                <extension>zip</extension>
-                <type>zip</type>
+                <extension>jar</extension>
+                <type>jar</type>
                 <language>java</language>
             </configuration>
         </component>

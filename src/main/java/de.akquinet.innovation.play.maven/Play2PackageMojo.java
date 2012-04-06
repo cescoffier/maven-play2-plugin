@@ -19,6 +19,11 @@ import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.ExecuteWatchdog;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.AbstractFileFilter;
+import org.apache.commons.io.filefilter.AndFileFilter;
+import org.apache.commons.io.filefilter.PrefixFileFilter;
+import org.apache.commons.io.filefilter.SuffixFileFilter;
+import org.apache.commons.lang.StringUtils;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.MojoExecutionException;
 
@@ -27,8 +32,8 @@ import java.io.IOException;
 import java.util.Collection;
 
 /**
- * Package the Play application. The application is packaged as a zip using <tt>play dist</tt>.
- * The created application is attached to the project.
+ * Package the Play application.
+ * The application is packaged as a Jar file. It is also possible to create the distribution package (zip).
  *
  * @goal package
  * @phase package
@@ -41,16 +46,93 @@ public class Play2PackageMojo
      *
      * @parameter default-value=""
      */
-    private String classifier;
+    String classifier;
+
+    /**
+     * Enables or disables the packaging of the whole distribution. The distribution is an autonomous archive containing
+     * all the files required to run the play application. Play 2 module can disable the distribution packaging.
+     *
+     * @parameter default-value=true
+     */
+    boolean buildDist;
+
+    /**
+     * Enables or disables the attachment of the distribution file as an artifact to this project.
+     * This option has no impact if the distribution is not built.
+     *
+     * @parameter default-value=true
+     */
+    boolean attachDist;
+
 
     public void execute()
             throws MojoExecutionException {
-        dist();
-        File out = moveBuiltArtifactToTarget();
-        addArtifactToProject(out);
+
+        // Package
+        packageApplication();
+        File packagedApplication = moveApplicationPackageToTarget();
+
+        // Distribution
+        File dist = null;
+        if (buildDist) {
+            packageDistribution();
+            dist = moveDistributionArtifactToTarget();
+        }
+        attachArtifactsToProject(packagedApplication, dist);
     }
 
-    private void dist() throws MojoExecutionException {
+    private File moveApplicationPackageToTarget() throws MojoExecutionException {
+        File target = new File(project.getBasedir(), "target");
+        File[] files = FileUtils.convertFileCollectionToFileArray(
+                FileUtils.listFiles(target, new PackageFileFilter(), new PrefixFileFilter("scala-")));
+        if (files.length == 0) {
+            throw new MojoExecutionException("Cannot find packaged file");
+        } else if (files.length > 1) {
+            getLog().error("Cannot find the packaged file - Too many matches");
+            for (File f : files) {
+                getLog().error("\t " + f.getAbsolutePath());
+            }
+            throw new MojoExecutionException("Cannot find packaged file : " + files.length + " matches");
+        }
+
+        try {
+            if (StringUtils.isBlank(classifier)) {
+                File out = new File(target, project.getBuild().getFinalName() + ".jar");
+                getLog().info("Copying " + files[0].getName() + " to " + out.getName());
+                FileUtils.copyFile(files[0], out);
+                return out;
+            } else {
+                File out = new File(target, project.getBuild().getFinalName() + "-" + classifier + ".jar");
+                getLog().info("Copying " + files[0].getName() + " to " + out.getName());
+                FileUtils.copyFile(files[0], out);
+                return out;
+            }
+        } catch (IOException e) {
+            throw new MojoExecutionException("Cannot copy package file " + files[0].getAbsolutePath()
+                    + " to " + target.getAbsolutePath());
+        }
+    }
+
+    private void packageApplication() throws MojoExecutionException {
+        String line = getPlay2().getAbsolutePath();
+
+        CommandLine cmdLine = CommandLine.parse(line);
+        cmdLine.addArgument("package");
+        DefaultExecutor executor = new DefaultExecutor();
+
+        ExecuteWatchdog watchdog = new ExecuteWatchdog(120000);
+        executor.setWatchdog(watchdog);
+        executor.setWorkingDirectory(project.getBasedir());
+        executor.setExitValue(0);
+        try {
+            executor.execute(cmdLine);
+        } catch (IOException e) {
+            throw new MojoExecutionException("Error during packaging", e);
+        }
+    }
+
+
+    private void packageDistribution() throws MojoExecutionException {
         String line = getPlay2().getAbsolutePath();
 
         CommandLine cmdLine = CommandLine.parse(line);
@@ -59,16 +141,16 @@ public class Play2PackageMojo
 
         ExecuteWatchdog watchdog = new ExecuteWatchdog(120000);
         executor.setWatchdog(watchdog);
-
+        executor.setWorkingDirectory(project.getBasedir());
         executor.setExitValue(0);
         try {
             executor.execute(cmdLine);
         } catch (IOException e) {
-            throw new MojoExecutionException("Error during compilation", e);
+            throw new MojoExecutionException("Error during distribution creation", e);
         }
     }
 
-    private File moveBuiltArtifactToTarget() throws MojoExecutionException {
+    private File moveDistributionArtifactToTarget() throws MojoExecutionException {
         // The artifact is in dist.
         File dist = new File(project.getBasedir(), "dist");
         if (!dist.exists()) {
@@ -88,7 +170,12 @@ public class Play2PackageMojo
         getLog().info("Distribution file found : " + file.getAbsolutePath());
 
         File target = new File(project.getBasedir(), "target");
-        File out = new File(target, project.getBuild().getFinalName() + ".zip");
+        File out = null;
+        if (classifier == null) {
+            out = new File(target, project.getBuild().getFinalName() + ".zip");
+        } else {
+            out = new File(target, project.getBuild().getFinalName() + "-" + classifier + ".zip");
+        }
 
         try {
             getLog().info("Copying " + file.getName() + " to " + out.getName());
@@ -100,12 +187,30 @@ public class Play2PackageMojo
         return out;
     }
 
-    private void addArtifactToProject(File out) {
+    private void attachArtifactsToProject(File app, File dist) {
         Artifact artifact = project.getArtifact();
-        if (null == classifier || classifier.trim().length() == 0) {
-            artifact.setFile(out);
+
+        if (StringUtils.isBlank(classifier)) {
+            artifact.setFile(app);
         } else {
-            projectHelper.attachArtifact(project, out, classifier);
+            projectHelper.attachArtifact(project, "jar", classifier, app);
         }
+
+        if (buildDist && attachDist) {
+            projectHelper.attachArtifact(project, "zip", classifier, dist);
+        }
+
+    }
+
+    private class PackageFileFilter extends AbstractFileFilter {
+
+        public boolean accept(File dir, String name) {
+            // Must be in the scala dir
+            return dir.getName().startsWith("scala")
+                    // Must ends with Jar
+                    && name.endsWith(".jar");
+        }
+
+
     }
 }

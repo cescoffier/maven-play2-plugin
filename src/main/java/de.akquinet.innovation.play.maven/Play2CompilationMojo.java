@@ -39,6 +39,7 @@ import java.util.List;
 public class Play2CompilationMojo
         extends AbstractPlay2Mojo {
 
+
     public void execute()
             throws MojoExecutionException {
 
@@ -50,8 +51,8 @@ public class Play2CompilationMojo
 
         ExecuteWatchdog watchdog = new ExecuteWatchdog(120000); // 2min, even for Scala should be ok
         executor.setWatchdog(watchdog);
-
         executor.setExitValue(0);
+        executor.setWorkingDirectory(project.getBasedir());
         try {
             executor.execute(cmdLine);
         } catch (IOException e) {

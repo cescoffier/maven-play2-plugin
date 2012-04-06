@@ -39,6 +39,7 @@
             <item name="Goals" href="plugin-info.html"/>
             <item name="Usage" href="usage.html"/>
             <item name="Quickstart" href="quickstart.html"/>
+            <item name="Play2 Modules" href="module.html"/>
         </menu>
         <menu ref="reports" />
     </body>

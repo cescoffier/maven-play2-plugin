@@ -1,0 +1,35 @@
+Building and Using Modules
+==========================
+
+Play2 is extensible using _modules_. The ${project.artifactId} supports the packaging and the inclusion of modules.
+
+Importing a Module
+------------------
+
+Play2 modules are just librairies. So, you can use a module by declaring it in your pom file:
+
+    <dependency>
+        <groupId>module.group.id</groupId>
+        <artifactId>module.artifact.id</artifactId>
+        <version>module.version</version>
+    </dependency>
+
+<div class="alert alert-info">
+  The dependency must be in the _compile_ scope.
+</div>
+
+Building a Module
+-----------------
+
+A Play 2 module is just a Play 2 application without a _route_ file. To build a module, just use the plugin as usual. If you
+want to optimize the process, disable the distribution packaging (as a module is not a complete application):
+
+    <plugin>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${project.artifactId}</artifactId>
+        <version>${project.version}</version>
+        <extensions>true</extensions>
+        <configuration>
+            <buildDist>false</buildDist>
+        </configuration>
+    </plugin>

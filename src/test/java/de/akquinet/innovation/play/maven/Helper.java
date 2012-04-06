@@ -1,11 +1,49 @@
+/*
+ * Copyright 2012 akquinet
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package de.akquinet.innovation.play.maven;
 
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
+import java.io.IOException;
+
 /**
- * Created with IntelliJ IDEA.
- * User: clement
- * Date: 05.04.12
- * Time: 19:19
- * To change this template use File | Settings | File Templates.
+ * Provide useful helper functions.
  */
 public class Helper {
+    //TODO Test clean mojo
+
+    public static final File JAVA_APP_ROOT = new File("src/test/resources/java/app");
+    public static final File SCALA_APP_ROOT = new File("src/test/resources/scala/app");
+
+    public static void copyJavaApp(File out) throws IOException {
+        if (out.exists()) {
+            FileUtils.deleteQuietly(out);
+        }
+        out.mkdirs();
+
+        FileUtils.copyDirectory(JAVA_APP_ROOT, out);
+    }
+
+    public static void copyScalaApp(File out) throws IOException {
+        if (out.exists()) {
+            FileUtils.deleteQuietly(out);
+        }
+        out.mkdirs();
+
+        FileUtils.copyDirectory(SCALA_APP_ROOT, out);
+    }
 }

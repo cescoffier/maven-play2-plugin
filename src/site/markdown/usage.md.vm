@@ -1,73 +1,111 @@
-------
 Usage
-------
+=====
 
-Usage
+Before starting, be sure to define the _PLAY2_HOME_ system variable used by the plugin to find the Play 2 SDK. The
+ packaging of your project must be _play2_.
 
-    Before starting, be sure to define the <<<PLAY2_HOME>>> system variable used by the plugin to find the Play 2
-    SDK. The packaging of your project must be <<<play2>>>.
+    export PLAY2_HOME=...
+    # or
+    mvn clean install -DPLAY2_HOME=...
 
-+---+
-export PLAY2_HOME=...
-# or
-mvn clean install -DPLAY2_HOME=...
-+---+
+Best practice is to define the version of the Play2 plugin that you want to use in either your _pom.xml_
+or a parent _pom.xml_.
 
-    Best practice is to define the version of the Play2 plugin that you want to use in either your <<<pom.xml>>>
-or a parent <<<pom.xml>>>.
+    <project>
+        [...]
+        <build>
+            <pluginManagement>
+                <plugins>
+                    <plugin>
+                        <groupId>${project.groupId}</groupId>
+                        <artifactId>${project.artifactId}</artifactId>
+                        <version>${project.version}</version>
+                    </plugin>
+                </plugins>
+            </pluginManagement>
+        </build>
+        [...]
+    </project>
 
-+---+
-<project>
-    [...]
-    <build>
-        <pluginManagement>
+To use the ${project.artifactId} Plugin, you need to add the following configuration to your _pom.xml_
+
+    <project>
+        [...]
+        <packaging>play2</packaging>
+        [...]
+        <build>
             <plugins>
                 <plugin>
                     <groupId>${project.groupId}</groupId>
                     <artifactId>${project.artifactId}</artifactId>
                     <version>${project.version}</version>
+                    <extensions>true</extensions>
                 </plugin>
             </plugins>
-        </pluginManagement>
-    </build>
-    [...]
-</project>
-+---+
+        </build>
+        [...]
+    </project>
 
-    To use the ${project.artifactId} Plugin, you need to add the following configuration to
-your <<<pom.xml>>>
 
-+---+
-<project>
-    [...]
-    <packaging>play2</packaging>
-    [...]
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>${project.artifactId}</artifactId>
-                <version>${project.version}</version>
-                <extensions>true</extensions>
-            </plugin>
-        </plugins>
-    </build>
-    [...]
-</project>
-+---+
+The ${project.artifactId} Plugin is invoked during the:
 
-    The ${project.artifactId} Plugin is invoked during the:
+* _process-resources_ phase : copy (compile) dependencies to the _lib_ directory
+* _compile_ phase: compile the Play 2 application
+* _test_ phase: run tests
+* _package_ phase: build the application package
 
-    * <<<process-resources>>> phase : copy (compile) dependencies to the <<<lib>>> directory
+A full run, executing all the above steps:
 
-    * <<<compile>>> phase: compile the Play 2 application
+    mvn clean install
 
-    * <<<test>>> phase: run tests
+Disable the distribution packaging
+----------------------------------
 
-    * <<<package>>> phase: build the application package
+By default the plugin generates two packages: a jar containing the application and a zip embeding all required files to
+run the application. For Play 2 modules this second packages is useless, so you can disable it using:
 
-    A full run, executing all the above steps:
+    <project>
+        [...]
+        <packaging>play2</packaging>
+        [...]
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>${project.artifactId}</artifactId>
+                    <version>${project.version}</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <buildDist>false</buildDist>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </build>
+        [...]
+    </project>
 
-+---+
-mvn clean install
-+---+
+Using a classifier
+------------------
+
+You can set the packaging classifier, applied to both packages (jar and zip):
+
+    <project>
+        [...]
+        <packaging>play2</packaging>
+        [...]
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>${project.artifactId}</artifactId>
+                    <version>${project.version}</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <classifier>my-classifier</classifier>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </build>
+        [...]
+    </project>
+

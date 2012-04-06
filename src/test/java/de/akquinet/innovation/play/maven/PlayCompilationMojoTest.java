@@ -33,6 +33,11 @@ public class PlayCompilationMojoTest {
 
     @Test
     public void testCompilationOfJavaApplication() throws IOException, MojoExecutionException {
+        if (! Helper.detectPlay2()) {
+            System.err.println("PLAY2)HOME missing, skipping tests");
+            return;
+        }
+
         File baseDir = new File("target/tests/testCompilationOfJavaApplication");
         Helper.copyJavaApp(baseDir);
 
@@ -45,6 +50,11 @@ public class PlayCompilationMojoTest {
 
     @Test
     public void testCompilationOfScalaApplication() throws IOException, MojoExecutionException {
+        if (! Helper.detectPlay2()) {
+            System.err.println("PLAY2)HOME missing, skipping tests");
+            return;
+        }
+
         File baseDir = new File("target/tests/testCompilationOfScalaApplication");
         Helper.copyScalaApp(baseDir);
 

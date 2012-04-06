@@ -46,4 +46,19 @@ public class Helper {
 
         FileUtils.copyDirectory(SCALA_APP_ROOT, out);
     }
+
+    public static boolean detectPlay2() {
+        String home = System.getProperty(AbstractPlay2Mojo.ENV_PLAY2_HOME);
+        if (home != null  && home.length() != 0) {
+            return true;
+        }
+
+        // Second check, environment variable
+        home = System.getenv(AbstractPlay2Mojo.ENV_PLAY2_HOME);
+        if (home != null  && home.length() != 0) {
+            return true;
+        }
+
+        return false;
+    }
 }

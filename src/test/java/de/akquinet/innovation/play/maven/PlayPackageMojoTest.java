@@ -36,6 +36,11 @@ public class PlayPackageMojoTest {
 
     @Test
     public void testPackagingOfJavaApplication() throws IOException, MojoExecutionException {
+        if (! Helper.detectPlay2()) {
+            System.err.println("PLAY2)HOME missing, skipping tests");
+            return;
+        }
+
         File baseDir = new File("target/tests/testPackagingOfJavaApplication");
         Helper.copyJavaApp(baseDir);
 
@@ -68,6 +73,11 @@ public class PlayPackageMojoTest {
 
     @Test
     public void testPackagingOfScalaApplication() throws IOException, MojoExecutionException {
+        if (! Helper.detectPlay2()) {
+            System.err.println("PLAY2)HOME missing, skipping tests");
+            return;
+        }
+
         File baseDir = new File("target/tests/testPackagingOfScalaApplication");
         Helper.copyScalaApp(baseDir);
 
@@ -100,6 +110,11 @@ public class PlayPackageMojoTest {
 
     @Test
     public void testPackagingOfJavaApplicationWithClassifier() throws IOException, MojoExecutionException {
+        if (! Helper.detectPlay2()) {
+            System.err.println("PLAY2)HOME missing, skipping tests");
+            return;
+        }
+
         File baseDir = new File("target/tests/testPackagingOfJavaApplicationWithClassifier");
         Helper.copyJavaApp(baseDir);
 
@@ -133,6 +148,11 @@ public class PlayPackageMojoTest {
 
     @Test
     public void testPackagingOfScalaApplicationWithClassifier() throws IOException, MojoExecutionException {
+        if (! Helper.detectPlay2()) {
+            System.err.println("PLAY2)HOME missing, skipping tests");
+            return;
+        }
+
         File baseDir = new File("target/tests/testPackagingOfScalaApplicationWithClassifier");
         Helper.copyScalaApp(baseDir);
 
@@ -166,6 +186,11 @@ public class PlayPackageMojoTest {
 
     @Test
     public void testPackagingOfJavaApplicationPackageOnly() throws IOException, MojoExecutionException {
+        if (! Helper.detectPlay2()) {
+            System.err.println("PLAY2)HOME missing, skipping tests");
+            return;
+        }
+
         File baseDir = new File("target/tests/testPackagingOfJavaApplicationPackageOnly");
         Helper.copyJavaApp(baseDir);
 
@@ -198,6 +223,11 @@ public class PlayPackageMojoTest {
 
     @Test
     public void testPackagingOfScalaApplicationPackageOnly() throws IOException, MojoExecutionException {
+        if (! Helper.detectPlay2()) {
+            System.err.println("PLAY2)HOME missing, skipping tests");
+            return;
+        }
+
         File baseDir = new File("target/tests/testPackagingOfScalaApplicationPackageOnly");
         Helper.copyScalaApp(baseDir);
 

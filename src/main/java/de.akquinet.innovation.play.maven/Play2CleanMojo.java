@@ -79,6 +79,19 @@ public class Play2CleanMojo
             getLog().debug("'dist' directory not found");
         }
 
+        // Delete the log folder
+        File logs = new File(project.getBasedir(), "logs");
+        if (logs.exists()) {
+            getLog().debug("Deleting " + logs.getAbsolutePath());
+            try {
+                FileUtils.deleteDirectory(logs);
+            } catch (IOException e) {
+                throw new MojoExecutionException("Can't delete the logs folder", e);
+            }
+        } else {
+            getLog().debug("'logs' directory not found");
+        }
+
         // Also delete the lib directory if set
         if (cleanLibFolder) {
             File lib = new File(project.getBasedir(), "lib");

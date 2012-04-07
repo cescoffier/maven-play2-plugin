@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd version="4.2.5" timestamp="2012-04-06T16:09:15.962">
+<pmd version="4.2.5" timestamp="2012-04-07T20:58:45.476">
 <file name="/Users/clement/Projects/ats-bilderverwaltung/maven-play2-plugin/maven-play2-plugin/src/main/java/de.akquinet.innovation.play.maven/Play2CleanMojo.java">
 <violation beginline="41" endline="41" begincolumn="18" endcolumn="20" rule="UnusedPrivateField" ruleset="Unused Code Rules" package="de.akquinet.innovation.play.maven" class="Play2CleanMojo" variable="lib" externalInfoUrl="http://pmd.sourceforge.net/rules/unusedcode.html#UnusedPrivateField" priority="3">
 Avoid unused private fields such as 'lib'.
@@ -29,14 +29,6 @@ Avoid unused imports such as 'java.io.File'
 </violation>
 <violation beginline="31" endline="31" begincolumn="1" endcolumn="22" rule="UnusedImports" ruleset="Import Statement Rules" package="de.akquinet.innovation.play.maven" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
 Avoid unused imports such as 'java.util.List'
-</violation>
-</file>
-<file name="/Users/clement/Projects/ats-bilderverwaltung/maven-play2-plugin/maven-play2-plugin/src/main/java/de.akquinet.innovation.play.maven/Play2PackageMojo.java">
-<violation beginline="23" endline="23" begincolumn="1" endcolumn="54" rule="UnusedImports" ruleset="Import Statement Rules" package="de.akquinet.innovation.play.maven" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
-Avoid unused imports such as 'org.apache.commons.io.filefilter.AndFileFilter'
-</violation>
-<violation beginline="25" endline="25" begincolumn="1" endcolumn="57" rule="UnusedImports" ruleset="Import Statement Rules" package="de.akquinet.innovation.play.maven" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
-Avoid unused imports such as 'org.apache.commons.io.filefilter.SuffixFileFilter'
 </violation>
 </file>
 <file name="/Users/clement/Projects/ats-bilderverwaltung/maven-play2-plugin/maven-play2-plugin/src/main/java/de.akquinet.innovation.play.maven/Play2RunMojo.java">

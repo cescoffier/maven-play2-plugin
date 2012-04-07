@@ -34,6 +34,11 @@ import static org.mockito.Mockito.*;
  */
 public class PlayPackageMojoTest {
 
+    /**
+     * This test also checks the <tt>deleteDist</tt> option.
+     * @throws IOException
+     * @throws MojoExecutionException
+     */
     @Test
     public void testPackagingOfJavaApplication() throws IOException, MojoExecutionException {
         if (! Helper.detectPlay2()) {
@@ -50,6 +55,7 @@ public class PlayPackageMojoTest {
         mojo.projectHelper = mock(MavenProjectHelper.class);
         mojo.attachDist = true;
         mojo.buildDist = true;
+        mojo.deleteDist = true;
         mojo.setLog(new SystemStreamLog());
         Build build = mock(Build.class);
         Artifact artifact = mock(Artifact.class);
@@ -69,8 +75,16 @@ public class PlayPackageMojoTest {
         assertThat(pack).exists();
         verify(artifact).setFile(pack);
         verify(mojo.projectHelper).attachArtifact(mojo.project, "zip", null, dist);
+
+        // Assert deleteDist option behavior
+        assertThat(new File(baseDir, "dist")).doesNotExist();
     }
 
+    /**
+     * This test checks that we can disable the <tt>deleteDist</tt> option.
+     * @throws IOException
+     * @throws MojoExecutionException
+     */
     @Test
     public void testPackagingOfScalaApplication() throws IOException, MojoExecutionException {
         if (! Helper.detectPlay2()) {
@@ -87,6 +101,7 @@ public class PlayPackageMojoTest {
         mojo.projectHelper = mock(MavenProjectHelper.class);
         mojo.attachDist = true;
         mojo.buildDist = true;
+        mojo.deleteDist = false;
         mojo.setLog(new SystemStreamLog());
         Build build = mock(Build.class);
         Artifact artifact = mock(Artifact.class);
@@ -106,6 +121,9 @@ public class PlayPackageMojoTest {
         assertThat(pack).exists();
         verify(artifact).setFile(pack);
         verify(mojo.projectHelper).attachArtifact(mojo.project, "zip", null, dist);
+
+        // Assert deleteDist option behavior
+        assertThat(new File(baseDir, "dist")).exists();
     }
 
     @Test

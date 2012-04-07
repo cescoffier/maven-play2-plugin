@@ -62,6 +62,13 @@ public class Play2PackageMojo
      */
     boolean attachDist;
 
+    /**
+     * Enables or disables the deletion of the <tt>dist</tt> folder after having packaged the application and copied the
+     * distribution file to <tt>target</tt>. It allows keeping the base directory cleaner.
+     * @parameter default-value=true
+     */
+    boolean deleteDist;
+
 
     public void execute()
             throws MojoExecutionException {
@@ -180,6 +187,12 @@ public class Play2PackageMojo
             FileUtils.copyFile(file, out, true);
         } catch (IOException e) {
             throw new MojoExecutionException("Can't copy the distribution file to the target folder", e);
+        }
+
+        // Delete the dist folder if enabled.
+        if (deleteDist) {
+            getLog().debug("Deleting " + dist.getAbsolutePath());
+            FileUtils.deleteQuietly(dist);
         }
 
         return out;

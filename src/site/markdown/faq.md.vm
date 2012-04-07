@@ -1,0 +1,44 @@
+# FAQ
+
+<div class="alert alert-info">
+  A trick is missing ? Just open an <a href="https://github.com/cescoffier/maven-play2-plugin/issues">issue</a>, and even better
+  fork the <a href="https://github.com/cescoffier/maven-play2-plugin/">project</a>, improve the documentation and send a pull request.
+</div>
+
+My IDE is complaining about missing classes (views, routes...)
+--------------------------------------------------------------
+
+<img src="images/faq-compilation-issue.png" alt="Missing view in Play 2 Controller" style="margin: 0 auto; display:block"/>
+
+Play 2 is generating a couple of classes (views, routes...) that your code is using such as routes and views. To make your IDE more happy,
+add <tt>target/scala-2.9.1/src_managed/main/</tt> as a source folder. Be careful to not modify such sources, as they will
+be regenerated during the next compilation.
+
+If you're using IDE's Maven support, you can use the <tt>build-helper-maven-plugin</tt> to add this source folder
+automatically:
+
+    <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>1.7</version>
+        <executions>
+            <execution>
+                <id>play2-add-managed-sources</id>
+                <goals>
+                    <goal>add-source</goal>
+                </goals>
+                <configuration>
+                    <sources>
+                        <source>
+                        \${project.build.directory}/scala-2.9.1/src_managed/main
+                        </source>
+                    </sources>
+                </configuration>
+            </execution>
+        </executions>
+    </plugin>
+
+
+
+
+

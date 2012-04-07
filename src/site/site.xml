@@ -40,6 +40,7 @@
             <item name="Usage" href="usage.html"/>
             <item name="Quickstart" href="quickstart.html"/>
             <item name="Play2 Modules" href="module.html"/>
+            <item name="FAQ" href="faq.html"/>
         </menu>
         <menu ref="reports" />
     </body>

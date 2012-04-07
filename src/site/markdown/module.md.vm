@@ -6,7 +6,7 @@ Play2 is extensible using _modules_. The ${project.artifactId} supports the pack
 Importing a Module
 ------------------
 
-Play2 modules are just librairies. So, you can use a module by declaring it in your pom file:
+Play2 modules are just libraries. So, you can use a module by declaring it in your pom file:
 
     <dependency>
         <groupId>module.group.id</groupId>

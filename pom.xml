@@ -362,6 +362,7 @@
                                 <phase>site</phase>
                                 <configuration>
                                     <path>maven/${project.version}</path>
+                                    <merge>true</merge>
                                 </configuration>
                             </execution>
                         </executions>

@@ -44,10 +44,25 @@
     <developers>
         <developer>
             <name>Clement Escoffier</name>
-            <email>clement.escoffier@gmail.[NO-SPAM].com</email>
+            <email>clement.escoffier@gmail.[NO-SPAM]com</email>
             <organization>akquinet tech@spree</organization>
+            <properties>
+                <github>cescoffier</github>
+            </properties>
         </developer>
     </developers>
+
+    <contributors>
+        <contributor>
+            <name>Paul Merlin</name>
+            <email>eskatos.0@gmail.[NO-SPAM]com</email>
+            <url>http://eskatos.github.com/</url>
+            <organization>QiPki</organization>
+            <properties>
+                    <github>eskatos</github>
+            </properties>
+        </contributor>
+    </contributors>
 
     <properties>
         <mavenVersion>2.2.1</mavenVersion>

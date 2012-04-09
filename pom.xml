@@ -65,6 +65,7 @@
 
     <properties>
         <mavenVersion>2.2.1</mavenVersion>
+        <project.url>http://cescoffier.github.com/maven-play2-plugin/maven/${project.version}</project.url>
     </properties>
 
     <prerequisites>

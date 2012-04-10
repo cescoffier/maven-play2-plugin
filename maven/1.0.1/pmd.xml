@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd version="4.2.5" timestamp="2012-04-10T20:08:08.081">
+<file name="/Users/clement/Projects/ats-bilderverwaltung/maven-play2-plugin/maven-play2-plugin/target/checkout/src/main/java/de.akquinet.innovation.play.maven/Play2CleanMojo.java">
+<violation beginline="41" endline="41" begincolumn="18" endcolumn="20" rule="UnusedPrivateField" ruleset="Unused Code Rules" package="de.akquinet.innovation.play.maven" class="Play2CleanMojo" variable="lib" externalInfoUrl="http://pmd.sourceforge.net/rules/unusedcode.html#UnusedPrivateField" priority="3">
+Avoid unused private fields such as 'lib'.
+</violation>
+</file>
+<file name="/Users/clement/Projects/ats-bilderverwaltung/maven-play2-plugin/maven-play2-plugin/target/checkout/src/main/java/de.akquinet.innovation.play.maven/Play2CompilationMojo.java">
+<violation beginline="21" endline="21" begincolumn="1" endcolumn="57" rule="UnusedImports" ruleset="Import Statement Rules" package="de.akquinet.innovation.play.maven" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'org.apache.maven.artifact.factory.ArtifactFactory'
+</violation>
+<violation beginline="22" endline="22" begincolumn="1" endcolumn="65" rule="UnusedImports" ruleset="Import Statement Rules" package="de.akquinet.innovation.play.maven" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'org.apache.maven.artifact.metadata.ArtifactMetadataSource'
+</violation>
+<violation beginline="23" endline="23" begincolumn="1" endcolumn="63" rule="UnusedImports" ruleset="Import Statement Rules" package="de.akquinet.innovation.play.maven" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'org.apache.maven.artifact.repository.ArtifactRepository'
+</violation>
+<violation beginline="24" endline="24" begincolumn="1" endcolumn="60" rule="UnusedImports" ruleset="Import Statement Rules" package="de.akquinet.innovation.play.maven" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'org.apache.maven.artifact.resolver.ArtifactCollector'
+</violation>
+<violation beginline="25" endline="25" begincolumn="1" endcolumn="59" rule="UnusedImports" ruleset="Import Statement Rules" package="de.akquinet.innovation.play.maven" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'org.apache.maven.artifact.resolver.ArtifactResolver'
+</violation>
+<violation beginline="27" endline="27" begincolumn="1" endcolumn="63" rule="UnusedImports" ruleset="Import Statement Rules" package="de.akquinet.innovation.play.maven" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'org.apache.maven.plugin.dependency.CopyDependenciesMojo'
+</violation>
+<violation beginline="29" endline="29" begincolumn="1" endcolumn="20" rule="UnusedImports" ruleset="Import Statement Rules" package="de.akquinet.innovation.play.maven" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'java.io.File'
+</violation>
+<violation beginline="31" endline="31" begincolumn="1" endcolumn="22" rule="UnusedImports" ruleset="Import Statement Rules" package="de.akquinet.innovation.play.maven" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'java.util.List'
+</violation>
+</file>
+<file name="/Users/clement/Projects/ats-bilderverwaltung/maven-play2-plugin/maven-play2-plugin/target/checkout/src/main/java/de.akquinet.innovation.play.maven/Play2RunMojo.java">
+<violation beginline="20" endline="20" begincolumn="1" endcolumn="47" rule="UnusedImports" ruleset="Import Statement Rules" package="de.akquinet.innovation.play.maven" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'org.apache.commons.exec.ExecuteWatchdog'
+</violation>
+<violation beginline="51" endline="53" begincolumn="11" endcolumn="9" rule="EmptyCatchBlock" ruleset="Basic Rules" package="de.akquinet.innovation.play.maven" class="Play2RunMojo" method="execute" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyCatchBlock" priority="3">
+Avoid empty catch blocks
+</violation>
+</file>
+</pmd>

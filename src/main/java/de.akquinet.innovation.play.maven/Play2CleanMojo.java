@@ -58,7 +58,7 @@ public class Play2CleanMojo
 
         ExecuteWatchdog watchdog = new ExecuteWatchdog(120000); // 2min, even for Scala should be ok
         executor.setWatchdog(watchdog);
-
+        executor.setWorkingDirectory(project.getBasedir());
         executor.setExitValue(0);
         try {
             executor.execute(cmdLine);

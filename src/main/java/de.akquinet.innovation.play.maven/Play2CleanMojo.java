@@ -63,7 +63,7 @@ public class Play2CleanMojo
         try {
             executor.execute(cmdLine);
         } catch (IOException e) {
-            throw new MojoExecutionException("Error during compilation", e);
+            throw new MojoExecutionException("Error during cleanup", e);
         }
         
         // Also delete the dist directory

@@ -68,12 +68,12 @@
 <a class="jxr_linenumber" name="58" href="#58">58</a>  
 <a class="jxr_linenumber" name="59" href="#59">59</a>          ExecuteWatchdog watchdog = <strong class="jxr_keyword">new</strong> ExecuteWatchdog(120000); <em class="jxr_comment">// 2min, even for Scala should be ok</em>
 <a class="jxr_linenumber" name="60" href="#60">60</a>          executor.setWatchdog(watchdog);
-<a class="jxr_linenumber" name="61" href="#61">61</a>  
+<a class="jxr_linenumber" name="61" href="#61">61</a>          executor.setWorkingDirectory(project.getBasedir());
 <a class="jxr_linenumber" name="62" href="#62">62</a>          executor.setExitValue(0);
 <a class="jxr_linenumber" name="63" href="#63">63</a>          <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="64" href="#64">64</a>              executor.execute(cmdLine);
 <a class="jxr_linenumber" name="65" href="#65">65</a>          } <strong class="jxr_keyword">catch</strong> (IOException e) {
-<a class="jxr_linenumber" name="66" href="#66">66</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> MojoExecutionException(<span class="jxr_string">"Error during compilation"</span>, e);
+<a class="jxr_linenumber" name="66" href="#66">66</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> MojoExecutionException(<span class="jxr_string">"Error during cleanup"</span>, e);
 <a class="jxr_linenumber" name="67" href="#67">67</a>          }
 <a class="jxr_linenumber" name="68" href="#68">68</a>          
 <a class="jxr_linenumber" name="69" href="#69">69</a>          <em class="jxr_comment">// Also delete the dist directory</em>

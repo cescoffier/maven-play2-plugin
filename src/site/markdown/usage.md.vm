@@ -8,6 +8,8 @@ Before starting, be sure to define the _PLAY2_HOME_ system variable used by the 
     # or
     mvn clean install -DPLAY2_HOME=...
 
+It is also possible to defined this location form the pom file directly (see below).
+
 Best practice is to define the version of the Play2 plugin that you want to use in either your _pom.xml_
 or a parent _pom.xml_.
 
@@ -57,6 +59,27 @@ The ${project.artifactId} Plugin is invoked during the:
 A full run, executing all the above steps:
 
     mvn clean install
+
+Setting Play 2 location from the pom file
+-----------------------------------------
+
+The _PLAY2_ location can also be defined in the _pom.xml_ file such as in:
+
+      <plugin>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${project.artifactId}</artifactId>
+        <version>${project.version}</version>
+        <extensions>true</extensions>
+          <configuration>
+            <play2Home>some/path/to/play-2.0</play2Home>
+          </configuration>
+      </plugin>
+
+The _PLAY2_ location can also be defined by the _play2home_ property:
+
+    <properties>
+        <PLAY2_HOME>some/path/to/play-2.0</PLAY2_HOME>
+    </properties>
 
 Disable the distribution packaging
 ----------------------------------

@@ -93,8 +93,8 @@ At the root of the created project, create a _pom.xml_ file with the following c
 Usage
 -----
 
-Before starting, be sure to define the _PLAY2_HOME_ system variable used by the plugin to find the Play 2 SDK. As shown
- in the previous pom file, the packaging of your project must be _play2_.
+Before starting, be sure to define the _PLAY2_HOME_ system variable used by the plugin to find the Play 2 SDK (or check
+the next section). As shown in the previous pom file, the packaging of your project must be _play2_.
 
 
     export PLAY2_HOME=...
@@ -117,4 +117,23 @@ Finally, to run the application:
 
     mvn play2:run
 
+Setting Play 2 location from the pom file
+-----------------------------------------
 
+The _PLAY2_ location can also be defined in the _pom.xml_ file such as in:
+
+      <plugin>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${project.artifactId}</artifactId>
+        <version>${project.version}</version>
+        <extensions>true</extensions>
+          <configuration>
+            <play2Home>some/path/to/play-2.0</play2Home>
+          </configuration>
+      </plugin>
+
+The _PLAY2_ location can also be defined by the _play2home_ property:
+
+    <properties>
+        <PLAY2_HOME>some/path/to/play-2.0</PLAY2_HOME>
+    </properties>

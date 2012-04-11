@@ -75,15 +75,28 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
     }
     
     public File getPlay2() throws MojoExecutionException {
+        File play2 = null;
         String path = getPlay2HomeOrThrow();
-        File play2 = new File(path, "play");
-        if (! play2.exists()) {
+        if (isWindows()) {
             play2 = new File(path, "play.bat");
+        } else {
+            play2 = new File(path, "play");
         }
+
         if (! play2.exists()) {
             throw new MojoExecutionException("Can't find the play executable in " + path);
         }
+
         return play2;
+    }
+
+    /**
+     * Checks whether the current operating system is Windows.
+     * This check use the <tt>os.name</tt> system property.
+      * @return <code>true</code> if the os is windows, <code>false</code> otherwise.
+     */
+    public boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().indexOf("win") != -1;
     }
 
 }

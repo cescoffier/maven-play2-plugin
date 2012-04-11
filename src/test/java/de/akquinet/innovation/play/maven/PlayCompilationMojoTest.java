@@ -34,7 +34,7 @@ public class PlayCompilationMojoTest {
     @Test
     public void testCompilationOfJavaApplication() throws IOException, MojoExecutionException {
         if (! Helper.detectPlay2()) {
-            System.err.println("PLAY2)HOME missing, skipping tests");
+            System.err.println("PLAY2_HOME missing, skipping tests");
             return;
         }
 
@@ -51,7 +51,7 @@ public class PlayCompilationMojoTest {
     @Test
     public void testCompilationOfScalaApplication() throws IOException, MojoExecutionException {
         if (! Helper.detectPlay2()) {
-            System.err.println("PLAY2)HOME missing, skipping tests");
+            System.err.println("PLAY2_HOME missing, skipping tests");
             return;
         }
 

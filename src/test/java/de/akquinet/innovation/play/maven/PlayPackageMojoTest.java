@@ -42,7 +42,7 @@ public class PlayPackageMojoTest {
     @Test
     public void testPackagingOfJavaApplication() throws IOException, MojoExecutionException {
         if (! Helper.detectPlay2()) {
-            System.err.println("PLAY2)HOME missing, skipping tests");
+            System.err.println("PLAY2_HOME missing, skipping tests");
             return;
         }
 
@@ -88,7 +88,7 @@ public class PlayPackageMojoTest {
     @Test
     public void testPackagingOfScalaApplication() throws IOException, MojoExecutionException {
         if (! Helper.detectPlay2()) {
-            System.err.println("PLAY2)HOME missing, skipping tests");
+            System.err.println("PLAY2_HOME missing, skipping tests");
             return;
         }
 
@@ -129,7 +129,7 @@ public class PlayPackageMojoTest {
     @Test
     public void testPackagingOfJavaApplicationWithClassifier() throws IOException, MojoExecutionException {
         if (! Helper.detectPlay2()) {
-            System.err.println("PLAY2)HOME missing, skipping tests");
+            System.err.println("PLAY2_HOME missing, skipping tests");
             return;
         }
 
@@ -167,7 +167,7 @@ public class PlayPackageMojoTest {
     @Test
     public void testPackagingOfScalaApplicationWithClassifier() throws IOException, MojoExecutionException {
         if (! Helper.detectPlay2()) {
-            System.err.println("PLAY2)HOME missing, skipping tests");
+            System.err.println("PLAY2_HOME missing, skipping tests");
             return;
         }
 
@@ -205,7 +205,7 @@ public class PlayPackageMojoTest {
     @Test
     public void testPackagingOfJavaApplicationPackageOnly() throws IOException, MojoExecutionException {
         if (! Helper.detectPlay2()) {
-            System.err.println("PLAY2)HOME missing, skipping tests");
+            System.err.println("PLAY2_HOME missing, skipping tests");
             return;
         }
 
@@ -242,7 +242,7 @@ public class PlayPackageMojoTest {
     @Test
     public void testPackagingOfScalaApplicationPackageOnly() throws IOException, MojoExecutionException {
         if (! Helper.detectPlay2()) {
-            System.err.println("PLAY2)HOME missing, skipping tests");
+            System.err.println("PLAY2_HOME missing, skipping tests");
             return;
         }
 

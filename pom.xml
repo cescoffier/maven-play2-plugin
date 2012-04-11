@@ -13,7 +13,8 @@
   ~ limitations under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -58,7 +59,7 @@
             <url>http://eskatos.github.com/</url>
             <organization>QiPki</organization>
             <properties>
-                    <github>eskatos</github>
+                <github>eskatos</github>
             </properties>
         </contributor>
     </contributors>
@@ -66,6 +67,8 @@
     <properties>
         <mavenVersion>2.2.1</mavenVersion>
         <project.url>http://cescoffier.github.com/maven-play2-plugin/maven/${project.version}</project.url>
+        <!-- empty by default, can be set using system props (-Dplay2.home=...)-->
+        <play2.home></play2.home>
     </properties>
 
     <prerequisites>
@@ -276,6 +279,19 @@
                         <version>1.0</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <systemProperties>
+                        <property>
+                            <name>PLAY2_HOME</name>
+                            <!-- pass in system property to surefire -->
+                            <value>${play2.home}</value>
+                        </property>
+                    </systemProperties>
+                </configuration>
             </plugin>
 
             <plugin>

@@ -31,7 +31,7 @@
             <googlePlusOne />
             <sourceLineNumbersEnabled>true</sourceLineNumbersEnabled>
 
-            <!-- Githut ribbon -->
+            <!-- Github ribbon -->
             <gitHub>
                 <projectId>cescoffier/maven-play2-plugin</projectId>
                 <ribbonOrientation>right</ribbonOrientation>

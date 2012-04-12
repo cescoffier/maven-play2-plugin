@@ -93,7 +93,7 @@ At the root of the created project, create a _pom.xml_ file with the following c
 Usage
 -----
 
-Before starting, be sure to define the _PLAY2_HOME_ system variable used by the plugin to find the Play 2 SDK (or check
+Before starting, be sure to define the _PLAY2\_HOME_ system variable used by the plugin to find the Play 2 SDK (or check
 the next section). As shown in the previous pom file, the packaging of your project must be _play2_.
 
 
@@ -132,8 +132,8 @@ The _PLAY2_ location can also be defined in the _pom.xml_ file such as in:
           </configuration>
       </plugin>
 
-The _PLAY2_ location can also be defined by the _play2home_ property:
+The plugin is checking in this order:
 
-    <properties>
-        <PLAY2_HOME>some/path/to/play-2.0</PLAY2_HOME>
-    </properties>
+* the PLAY2\_HOME system variable (set with -DPLAY2\_HOME=...)
+* the _play2Home_ setting
+* the PLAY2\_HOME environment variable

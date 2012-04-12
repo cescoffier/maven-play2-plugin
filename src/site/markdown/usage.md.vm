@@ -1,7 +1,7 @@
 Usage
 =====
 
-Before starting, be sure to define the _PLAY2_HOME_ system variable used by the plugin to find the Play 2 SDK. The
+Before starting, be sure to define the _PLAY2\_HOME_ system variable used by the plugin to find the Play 2 SDK. The
  packaging of your project must be _play2_.
 
     export PLAY2_HOME=...
@@ -75,16 +75,16 @@ The _PLAY2_ location can also be defined in the _pom.xml_ file such as in:
           </configuration>
       </plugin>
 
-The _PLAY2_ location can also be defined by the _play2home_ property:
+The plugin is checking in this order:
 
-    <properties>
-        <PLAY2_HOME>some/path/to/play-2.0</PLAY2_HOME>
-    </properties>
+* the PLAY2\_HOME system variable (set with -DPLAY2\_HOME=...)
+* the _play2Home_ setting
+* the PLAY2\_HOME environment variable
 
 Disable the distribution packaging
 ----------------------------------
 
-By default the plugin generates two packages: a jar containing the application and a zip embeding all required files to
+By default the plugin generates two packages: a jar containing the application and a zip embedding all required files to
 run the application. For Play 2 modules this second packages is useless, so you can disable it using:
 
     <project>

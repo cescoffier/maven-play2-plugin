@@ -76,23 +76,31 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
      * Gets the specified <tt>PLAY2_HOME</tt> location.
      * This method checks in this order:
      * <ul>
-     *     <li>the PLAY2_HOME system variable</li>
-     *     <li>the <tt>play2Home</tt> settings or environment variable</li>
+     * <li>the PLAY2_HOME system variable</li>
+     * <li>the <tt>play2Home</tt> settings</li>
+     * <li>the PLAY2_HOME environment variable</li>
      * </ul>
      * If none is set, this method throws an exception.
+     *
      * @return the play2 location
      * @throws MojoExecutionException if the play2 location is not defined.
      */
     public String getPlay2HomeOrThrow() throws MojoExecutionException {
-        // First check, system variable        
+        // First check, system variable
         String home = System.getProperty(ENV_PLAY2_HOME);
         if (home != null && !home.isEmpty()) {
             return home;
         }
 
-        // Second check, configuration or environment variable
+        // Second check, the setting configuration
         if (play2Home != null && !play2Home.isEmpty()) {
             return play2Home;
+        }
+
+        // Third check, environment variable
+        home = System.getenv(ENV_PLAY2_HOME);
+        if (home != null && !home.isEmpty()) {
+            return home;
         }
 
         throw new MojoExecutionException(ENV_PLAY2_HOME + " system/configuration/environment variable not set");

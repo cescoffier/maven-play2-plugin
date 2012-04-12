@@ -89,17 +89,20 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
         // First check, system variable
         String home = System.getProperty(ENV_PLAY2_HOME);
         if (home != null && !home.isEmpty()) {
+            getLog().debug("Get Play2 home from system variable");
             return home;
         }
 
         // Second check, the setting configuration
         if (play2Home != null && !play2Home.isEmpty()) {
+            getLog().debug("Get Play2 home from settings");
             return play2Home;
         }
 
         // Third check, environment variable
         home = System.getenv(ENV_PLAY2_HOME);
         if (home != null && !home.isEmpty()) {
+            getLog().debug("Get Play2 home from environment");
             return home;
         }
 
@@ -118,6 +121,8 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
 
         if (!play2.exists()) {
             throw new MojoExecutionException("Can't find the play executable in " + path);
+        } else {
+            getLog().debug("Using " + play2.getAbsolutePath());
         }
 
         return play2;

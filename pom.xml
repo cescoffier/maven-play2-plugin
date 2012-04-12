@@ -33,6 +33,21 @@
     <url>https://github.com/cescoffier/maven-play2-plugin</url>
     <inceptionYear>2012</inceptionYear>
 
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/cescoffier/maven-play2-plugin/issues</url>
+    </issueManagement>
+
+    <mailingLists>
+        <mailingList>
+            <name>Play 2</name>
+            <subscribe>https://groups.google.com/group/play-framework</subscribe>
+            <unsubscribe>https://groups.google.com/group/play-framework</unsubscribe>
+            <post>play-framework@googlegroups.com</post>
+            <archive>https://groups.google.com/group/play-framework</archive>
+        </mailingList>
+    </mailingLists>
+
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -60,6 +75,16 @@
             <organization>QiPki</organization>
             <properties>
                 <github>eskatos</github>
+            </properties>
+        </contributor>
+
+        <contributor>
+            <name>Robin Palotai</name>
+            <email></email>
+            <url></url>
+            <organization>EPAM Systems</organization>
+            <properties>
+                <github>robinp</github>
             </properties>
         </contributor>
     </contributors>

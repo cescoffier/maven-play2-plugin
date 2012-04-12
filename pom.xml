@@ -220,6 +220,7 @@
                 <artifactId>maven-site-plugin</artifactId>
                 <version>3.0</version>
                 <configuration>
+                    <skipDeploy>true</skipDeploy>
                     <reportPlugins>
                         <plugin>
                             <artifactId>maven-plugin-plugin</artifactId>
@@ -333,9 +334,30 @@
                 <version>2.2.1</version>
                 <configuration>
                     <useReleaseProfile>true</useReleaseProfile>
-                    <goals>plugin:report deploy site</goals>
+                    <goals>plugin:report site-deploy</goals>
                     <arguments>-Prelease</arguments>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version>0.5</version>
+                <configuration>
+                    <message>Building site for ${project.version}</message>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>site</goal>
+                        </goals>
+                        <phase>site-deploy</phase>
+                        <configuration>
+                            <path>maven/${project.version}</path>
+                            <merge>true</merge>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -372,26 +394,6 @@
             <id>release</id>
             <build>
                 <plugins>
-                    <plugin>
-                        <groupId>com.github.github</groupId>
-                        <artifactId>site-maven-plugin</artifactId>
-                        <version>0.5</version>
-                        <configuration>
-                            <message>Building site for ${project.version}</message>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>site</goal>
-                                </goals>
-                                <phase>site</phase>
-                                <configuration>
-                                    <path>maven/${project.version}</path>
-                                    <merge>true</merge>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>

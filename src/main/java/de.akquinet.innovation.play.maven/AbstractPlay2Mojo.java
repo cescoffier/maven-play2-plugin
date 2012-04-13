@@ -69,6 +69,14 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
      */
     String play2Home;
 
+    /**
+     * Sets a timeout to the <tt>play</tt> invocation (in milliseconds).
+     * If not set (or set to <tt>-1</tt>, the plugin waits until the underlying <tt>play</tt> process completes.
+     * If set, the plugin kills the underlying <tt>play</tt> process when the timeout is reached, and it fails the build.
+     * @parameter default-value="-1" expression="${play2timeout}"
+     */
+    long timeout;
+
 
     public static final String ENV_PLAY2_HOME = "PLAY2_HOME";
 

@@ -16,11 +16,13 @@
 package de.akquinet.innovation.play.maven;
 
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.project.MavenProject;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 /**
  * Checks the common methods of Play 2 mojos
@@ -75,6 +77,14 @@ public class Play2MojoTest {
         }
 
         assertThat(mojo.getPlay2HomeOrThrow()).isEqualTo(env);
+    }
+
+    @Test(expected = MojoExecutionException.class)
+    public void testTimeout() throws MojoExecutionException {
+        Play2CleanMojo mojo = new Play2CleanMojo();
+        mojo.timeout = 1; // 1 ms is just not enough
+        mojo.project = mock(MavenProject.class);
+        mojo.execute();
     }
 
 }

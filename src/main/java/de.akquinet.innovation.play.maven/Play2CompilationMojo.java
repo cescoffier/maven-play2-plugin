@@ -49,8 +49,11 @@ public class Play2CompilationMojo
         cmdLine.addArgument("compile");
         DefaultExecutor executor = new DefaultExecutor();
 
-        ExecuteWatchdog watchdog = new ExecuteWatchdog(120000); // 2min, even for Scala should be ok
-        executor.setWatchdog(watchdog);
+        if (timeout > 0) {
+            ExecuteWatchdog watchdog = new ExecuteWatchdog(timeout);
+            executor.setWatchdog(watchdog);
+        }
+
         executor.setExitValue(0);
         executor.setWorkingDirectory(project.getBasedir());
         try {

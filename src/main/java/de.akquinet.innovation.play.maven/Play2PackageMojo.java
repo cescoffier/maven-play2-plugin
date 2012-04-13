@@ -125,8 +125,11 @@ public class Play2PackageMojo
         cmdLine.addArgument("package");
         DefaultExecutor executor = new DefaultExecutor();
 
-        ExecuteWatchdog watchdog = new ExecuteWatchdog(120000);
-        executor.setWatchdog(watchdog);
+        if (timeout > 0) {
+            ExecuteWatchdog watchdog = new ExecuteWatchdog(timeout);
+            executor.setWatchdog(watchdog);
+        }
+
         executor.setWorkingDirectory(project.getBasedir());
         executor.setExitValue(0);
         try {
@@ -144,8 +147,11 @@ public class Play2PackageMojo
         cmdLine.addArgument("dist");
         DefaultExecutor executor = new DefaultExecutor();
 
-        ExecuteWatchdog watchdog = new ExecuteWatchdog(120000);
-        executor.setWatchdog(watchdog);
+        if (timeout > 0) {
+            ExecuteWatchdog watchdog = new ExecuteWatchdog(timeout);
+            executor.setWatchdog(watchdog);
+        }
+
         executor.setWorkingDirectory(project.getBasedir());
         executor.setExitValue(0);
         try {

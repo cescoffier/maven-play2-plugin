@@ -71,8 +71,11 @@ public class Play2TestMojo
         cmdLine.addArgument("test");
         DefaultExecutor executor = new DefaultExecutor();
 
-        ExecuteWatchdog watchdog = new ExecuteWatchdog(5 * 60 * 1000); // 5 min
-        executor.setWatchdog(watchdog);
+        if (timeout > 0) {
+            ExecuteWatchdog watchdog = new ExecuteWatchdog(timeout);
+            executor.setWatchdog(watchdog);
+        }
+
         executor.setWorkingDirectory(project.getBasedir());
 
         executor.setExitValue(0);

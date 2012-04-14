@@ -9,7 +9,7 @@ are also managed using Maven.
 
 The documentation is available on :
 
-* http://cescoffier.github.com/maven-play2-plugin/maven/1.0.1/ for the latest release
-* http://cescoffier.github.com/maven-play2-plugin/maven/1.1.0-SNAPSHOT/ for the development version
+* http://cescoffier.github.com/maven-play2-plugin/maven/1.1.0/ for the latest release
+* http://cescoffier.github.com/maven-play2-plugin/maven/1.2.0-SNAPSHOT/ for the development version
 
 The plugin is licensed under the Apache Software License 2.0.

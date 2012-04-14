@@ -356,7 +356,7 @@
                 <version>2.2.1</version>
                 <configuration>
                     <useReleaseProfile>true</useReleaseProfile>
-                    <goals>plugin:report site-deploy</goals>
+                    <goals>deploy plugin:report site-deploy</goals>
                     <arguments>-Prelease</arguments>
                 </configuration>
             </plugin>

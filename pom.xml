@@ -91,6 +91,7 @@
         <project.url>http://cescoffier.github.com/maven-play2-plugin/maven/${project.version}</project.url>
         <!-- empty by default, can be set using system props (-Dplay2.home=...)-->
         <play2.home />
+	    <site.path>maven/snapshot</site.path>
     </properties>
 
     <prerequisites>
@@ -375,7 +376,7 @@
                         </goals>
                         <phase>site-deploy</phase>
                         <configuration>
-                            <path>maven/${project.version}</path>
+                            <path>${site.path}</path>
                             <merge>true</merge>
                         </configuration>
                     </execution>
@@ -414,6 +415,9 @@
 
         <profile>
             <id>release</id>
+			<properties>
+				<site.path>maven/release</site.path>
+			</properties>	
             <build>
                 <plugins>
                     <plugin>

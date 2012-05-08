@@ -40,6 +40,18 @@ automatically:
     </plugin>
 
 
+<a name="Homebrew"></a>
+My Homebrew installation from play 2 does not work
+--------------------------------------------------
 
+When <tt>PLAY2_HOME</tt> is using a [homebrew](http://mxcl.github.com/homebrew/) play 2 installation, you get:
+
+
+    [INFO] --- play2-maven-plugin:1.2.0-SNAPSHOT:compile (default-compile) @ play2-authenticitytoken-sample ---
+    /usr/local/Cellar/play/2.0/libexec/play: line 51: /usr/local/Cellar/play/2.0/libexec//usr/local/Cellar/play/2.0/
+    libexec/../libexec/framework/build: No such file or directory
+
+The problem comes from the homebrew installation of play using relative directories. The versions 1.2.0+ of the
+${project.artifactId} manages this issue by using directly the play 2 executable from "/usr/local/bin/play"
 
 

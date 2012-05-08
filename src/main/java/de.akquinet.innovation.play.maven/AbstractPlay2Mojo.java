@@ -126,6 +126,7 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
         } else {
             play2 = new File(path, "play");
         }
+        play2 = manageHomebrew(play2);
 
         if (!play2.exists()) {
             throw new MojoExecutionException("Can't find the play executable in " + path);
@@ -133,6 +134,33 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
             getLog().debug("Using " + play2.getAbsolutePath());
         }
 
+        return play2;
+    }
+
+    /**
+     * Checks whether the given play executable is in a <tt>Homebrew</tt> managed location.
+     * Homebrew scripts seems to be an issue for play as the provided play executable from this directory is using a
+     *  path expecting relative directories. So, we get such kind of error:
+     * <code>
+     *    /usr/local/Cellar/play/2.0/libexec/play: line 51:
+     *    /usr/local/Cellar/play/2.0/libexec//usr/local/Cellar/play/2.0/libexec/../libexec/framework/build:
+     *    No such file or directory
+     * </code>
+     * In this case we substitute the play executable with the one installed by Homebrew but working correctly.
+     * @param play2 the found play2 executable
+     * @return the given play2 executable except if Homebrew is detected, in this case <tt>/usr/local/bin/play</tt>.
+     */
+    private File manageHomebrew(File play2) {
+        if (play2.getAbsolutePath().startsWith("/usr/local/Cellar/play/")) {
+            getLog().info("Homebrew installation of play detected");
+            // Substitute the play executable by the homebrew one.
+            File file = new File("/usr/local/bin/play");
+            if (! file.exists()) {
+                getLog().error("Homebrew installation detected, but no play executable in /usr/local/bin");
+            } else {
+                return file;
+            }
+        }
         return play2;
     }
 

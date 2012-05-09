@@ -1,12 +1,14 @@
 Usage
 =====
 
-Before starting, be sure to define the _PLAY2\_HOME_ system variable used by the plugin to find the Play 2 SDK. The
- packaging of your project must be _play2_.
+Before starting, be sure to have the _play_ executable available from your _PATH_ or to have defined the _PLAY2\_HOME_
+ system variable used by the plugin to find the Play 2 SDK. The packaging of your project must be _play2_.
 
     export PLAY2_HOME=...
     # or
     mvn clean install -DPLAY2_HOME=...
+    # or if play is available in your path
+    mvn clean install
 
 It is also possible to defined this location form the pom file directly (see below).
 
@@ -80,6 +82,8 @@ The plugin is checking in this order:
 * the PLAY2\_HOME system variable (set with -DPLAY2\_HOME=...)
 * the _play2Home_ setting
 * the PLAY2\_HOME environment variable
+
+If _PLAY2\_HOME_ is not defined, the plugin is looking inside the system _PATH_ to find the _play_ executable.
 
 Disable the distribution packaging
 ----------------------------------

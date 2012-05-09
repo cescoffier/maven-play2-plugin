@@ -50,7 +50,7 @@ public class Play2MojoTest {
         System.setProperty(AbstractPlay2Mojo.ENV_PLAY2_HOME, "somewhere");
         Play2CleanMojo mojo = new Play2CleanMojo();
         mojo.play2Home = "ignored";
-        assertThat(mojo.getPlay2HomeOrThrow()).isEqualTo("somewhere");
+        assertThat(mojo.getPlay2Home()).isEqualTo("somewhere");
     }
 
     @Test
@@ -61,7 +61,7 @@ public class Play2MojoTest {
         Play2CleanMojo mojo = new Play2CleanMojo();
         mojo.play2Home = "somewhere";
 
-        assertThat(mojo.getPlay2HomeOrThrow()).isEqualTo("somewhere");
+        assertThat(mojo.getPlay2Home()).isEqualTo("somewhere");
     }
 
     @Test
@@ -76,7 +76,7 @@ public class Play2MojoTest {
             env = "somewhere";
         }
 
-        assertThat(mojo.getPlay2HomeOrThrow()).isEqualTo(env);
+        assertThat(mojo.getPlay2Home()).isEqualTo(env);
     }
 
     @Test(expected = MojoExecutionException.class)

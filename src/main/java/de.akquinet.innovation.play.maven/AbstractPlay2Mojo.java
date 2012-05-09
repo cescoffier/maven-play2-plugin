@@ -12,8 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package de.akquinet.innovation.play.maven;
+
+
 
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.AbstractMojo;
@@ -81,6 +82,11 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
     public static final String ENV_PLAY2_HOME = "PLAY2_HOME";
 
     /**
+     * Stored the play 2 executable once found to avoid multiple searches.
+     */
+    private File play2executable;
+
+    /**
      * Gets the specified <tt>PLAY2_HOME</tt> location.
      * This method checks in this order:
      * <ul>
@@ -90,10 +96,9 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
      * </ul>
      * If none is set, this method throws an exception.
      *
-     * @return the play2 location
-     * @throws MojoExecutionException if the play2 location is not defined.
+     * @return the play2 location or <code>null</code> if not specified.
      */
-    public String getPlay2HomeOrThrow() throws MojoExecutionException {
+    public String getPlay2Home() {
         // First check, system variable
         String home = System.getProperty(ENV_PLAY2_HOME);
         if (home != null && !home.isEmpty()) {
@@ -114,25 +119,46 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
             return home;
         }
 
-        throw new MojoExecutionException(ENV_PLAY2_HOME + " system/configuration/environment variable not set");
-
+        return null;
     }
 
     public File getPlay2() throws MojoExecutionException {
-        File play2 = null;
-        String path = getPlay2HomeOrThrow();
-        if (isWindows()) {
-            play2 = new File(path, "play.bat");
-        } else {
-            play2 = new File(path, "play");
+        // Do we have a cached value ?
+        if (play2executable != null) {
+            return play2executable;
         }
-        play2 = manageHomebrew(play2);
 
-        if (!play2.exists()) {
-            throw new MojoExecutionException("Can't find the play executable in " + path);
+        File play2 = null;
+
+        // Either PLAY2_HOME is defined or not.
+        // In the first case, we're looking for PLAY2_HOME/play[.bat]
+        // In the second case we iterate over the PATH.
+        String path = getPlay2Home();
+        if (path != null) {
+            if (isWindows()) {
+                play2 = new File(path, "play.bat");
+            } else {
+                play2 = new File(path, "play");
+            }
+            if (play2.isFile()) {
+                play2 = manageHomebrew(play2);
+            } else {
+                throw new MojoExecutionException(ENV_PLAY2_HOME + " system/configuration/environment variable is set " +
+                        "to " + path + " but can't find the 'play' executable");
+            }
         } else {
-            getLog().debug("Using " + play2.getAbsolutePath());
+            getLog().info("Looking for 'play' in the System PATH");
+            play2 = findPlay2ExecutableInSystemPath();
         }
+
+        if (play2 == null || !play2.isFile()) {
+            throw new MojoExecutionException("Can't find the 'play' executable. Set the " + ENV_PLAY2_HOME + " system/" +
+                    "configuration/environment variable or check the the 'play' executable is available from the " +
+                    "path");
+        }
+
+        getLog().debug("Using " + play2.getAbsolutePath());
+        play2executable = play2;
 
         return play2;
     }
@@ -141,11 +167,13 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
      * Checks whether the given play executable is in a <tt>Homebrew</tt> managed location.
      * Homebrew scripts seems to be an issue for play as the provided play executable from this directory is using a
      *  path expecting relative directories. So, we get such kind of error:
+     *  <br/>
      * <code>
      *    /usr/local/Cellar/play/2.0/libexec/play: line 51:
      *    /usr/local/Cellar/play/2.0/libexec//usr/local/Cellar/play/2.0/libexec/../libexec/framework/build:
      *    No such file or directory
      * </code>
+     * <br/>
      * In this case we substitute the play executable with the one installed by Homebrew but working correctly.
      * @param play2 the found play2 executable
      * @return the given play2 executable except if Homebrew is detected, in this case <tt>/usr/local/bin/play</tt>.
@@ -164,6 +192,30 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
         return play2;
     }
 
+    private File findPlay2ExecutableInSystemPath() {
+        String play2 = "play";
+        if (isWindows()) {
+            play2 = "play.bat";
+        }
+        String systemPath = System.getenv("PATH");
+
+        // Fast failure if we don't have the PATH defined.
+        if (systemPath == null) {
+            return null;
+        }
+
+        String[] pathDirs = systemPath.split(File.pathSeparator);
+
+        for (String pathDir : pathDirs) {
+            File file = new File(pathDir, play2);
+            if (file.isFile()) {
+                return file;
+            }
+        }
+        // Search not successful.
+        return null;
+    }
+
     /**
      * Checks whether the current operating system is Windows.
      * This check use the <tt>os.name</tt> system property.
@@ -171,7 +223,6 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
      * @return <code>true</code> if the os is windows, <code>false</code> otherwise.
      */
     public boolean isWindows() {
-        return System.getProperty("os.name").toLowerCase().indexOf("win") != -1;
+        return System.getProperty("os.name").toLowerCase().contains("win");
     }
-
 }

@@ -179,7 +179,7 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
      * @return the given play2 executable except if Homebrew is detected, in this case <tt>/usr/local/bin/play</tt>.
      */
     private File manageHomebrew(File play2) {
-        if (play2.getAbsolutePath().startsWith("/usr/local/Cellar/play/")) {
+        if (play2.getAbsolutePath().contains("/Cellar/play/")) {
             getLog().info("Homebrew installation of play detected");
             // Substitute the play executable by the homebrew one.
             File file = new File("/usr/local/bin/play");

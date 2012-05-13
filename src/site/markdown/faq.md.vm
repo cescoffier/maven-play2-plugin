@@ -54,4 +54,15 @@ When <tt>PLAY2_HOME</tt> is using a [homebrew](http://mxcl.github.com/homebrew/)
 The problem comes from the homebrew installation of play using relative directories. The versions 1.2.0+ of the
 ${project.artifactId} manages this issue by using directly the play 2 executable from "/usr/local/bin/play"
 
+<a name="MavenSbtSync"></a>
+Do I have to keep in sync my SBT Metadata and my Maven metadata ?
+-----------------------------------------------------------------
+
+No, the plugin manages that for you.
+
+Play is using <tt>appName</tt> and <tt>appVersion</tt> to identify the project. The Maven plugin keeps those values
+synchronized with the Maven <tt>artifactId</tt> and <tt>version</tt>. When different, the plugin rewrites the <tt>
+project/Build.scala</tt> file with the Maven values. Obviously, you can disable this behavior with:
+
+    mvn clean install -DskipMetadataSync=true # won't try to sync SBT and Maven metadata
 

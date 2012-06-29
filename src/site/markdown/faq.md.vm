@@ -55,14 +55,26 @@ The problem comes from the homebrew installation of play using relative director
 ${project.artifactId} manages this issue by using directly the play 2 executable from "/usr/local/bin/play"
 
 <a name="MavenSbtSync"></a>
-Do I have to keep in sync my SBT Metadata and my Maven metadata ?
------------------------------------------------------------------
+How do I keep in sync my SBT Metadata and my Maven metadata ?
+-------------------------------------------------------------
 
-No, the plugin manages that for you.
+For each _play_ invocations, the plugin build an environment containing the Maven metadata such as:
 
-Play is using <tt>appName</tt> and <tt>appVersion</tt> to identify the project. The Maven plugin keeps those values
-synchronized with the Maven <tt>artifactId</tt> and <tt>version</tt>. When different, the plugin rewrites the <tt>
-project/Build.scala</tt> file with the Maven values. Obviously, you can disable this behavior with:
+* _project.groupId_ : the Maven group Id
+* _project.artifactId_ : the Maven artifact Id
+* _project.version_ : the Maven version
+* all other Maven properties_
 
-    mvn clean install -DskipMetadataSync=true # won't try to sync SBT and Maven metadata
+So, to keep your version in sync, you need to edit your _project/Build.scala_ file and add:
+
+    def fromEnv(name: String) = System.getenv(name) match {
+      case null => None
+      case value => Some(value)
+    }
+
+    val appName = fromEnv("project.artifactId").getOrElse("my-app")
+    val appVersion = fromEnv("project.version").getOrElse("1.0-SNAPSHOT")
+    // ...
+
+
 

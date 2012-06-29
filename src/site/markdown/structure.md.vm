@@ -1,0 +1,80 @@
+Using the Maven structure
+==========================
+
+To some degree, you can configure Play to use a Maven-like directory structure. This page explains how this can be
+configured.
+
+Using Maven artifactID and version
+-----------------------------------
+
+Open the _project/Build.scala_ file, and change the _appName_ and _appVersion_ variable definition to:
+
+    def fromEnv(name: String) = System.getenv(name) match {
+        case null => None
+        case value => Some(value)
+    }
+
+    val appName = fromEnv("project.artifactId").getOrElse("my-app")
+    val appVersion = fromEnv("project.version").getOrElse("1.0-SNAPSHOT")
+
+<div class="alert alert-info">
+  The _project.artifactId_ and _project.version_ variables are set by the plugin.
+</div>
+
+Source and Test folders
+------------------------
+
+We will now see how to configure the project to have our Java sources in _src/main/java_, Scala sources in _src/main/scala_,
+and tests in _src/test/java_ and _src/test/scala_. In the _project/Build.scala_ file, update the Play Project definition to:
+
+    val main = PlayProject(appName, appVersion, appDependencies, mainLang = JAVA).settings(
+        // Source folders
+        sourceDirectory in Compile <<= baseDirectory / "src/main/java",
+        sourceDirectory in Test <<= baseDirectory / "src/test/java",
+
+        scalaSource in Compile <<= baseDirectory / "src/main/scala",
+        scalaSource in Test <<= baseDirectory / "src/test/scala",
+
+        javaSource in Compile <<= baseDirectory / "src/main/java",
+        javaSource in Test <<= baseDirectory / "src/test/java"
+    )
+
+Configuration folder
+--------------------
+
+Let's now see how to configure _src/main/conf_ to be the Play 2 conf folder. Add to the Play Project settings the following
+lines:
+
+    confDirectory <<= baseDirectory / "src/main/conf",
+    resourceDirectory in Compile <<= baseDirectory / "src/main/conf"
+
+You can move the _application.conf_, _routes_ and others configuration files into this folder.
+
+<div class="alert alert-info">
+  The _play_ executable is checking for the existence of _conf/application.conf_ to detect whether or not the folder
+  contains a Play application. So, you still need a _conf/application.conf_ file, but this file can be empty.
+</div>
+
+Static Assets
+-------------
+
+Changing the _public_ folder is a bit more complex as it requires two manipulations. First, in _ _project/Build.scala_, in
+the project settings add:
+
+    playAssetsDirectories := Seq.empty[File],
+    // The route file also needs to be updated...
+    playAssetsDirectories <+= baseDirectory / "src/main/resources"
+
+Then open the _route_ file and change the reference to _/public_ to:
+
+    # Map static resources from the /src/main/resources folder to the /assets URL path
+    GET     /assets/*file               controllers.Assets.at(path="/src/main/resources", file)
+
+What can't be adapted right now
+-------------------------------
+
+    * The _dist_ folder can be set, but this settings is ignored by Play. It should be fixed in Play 2.1.
+    * The _lib_ folder including the unmanaged dependencies cannot be moved. SBT supports this settings, but it seems
+    ignored by Play.
+
+

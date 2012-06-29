@@ -28,6 +28,7 @@ public class Helper {
 
     public static final File JAVA_APP_ROOT = new File("src/test/resources/java/app");
     public static final File SCALA_APP_ROOT = new File("src/test/resources/scala/app");
+    public static final File MAVEN_APP_ROOT = new File("src/test/resources/sbt-properties/app");
 
     public static void copyJavaApp(File out) throws IOException {
         if (out.exists()) {
@@ -36,6 +37,15 @@ public class Helper {
         out.mkdirs();
 
         FileUtils.copyDirectory(JAVA_APP_ROOT, out);
+    }
+
+    public static void copyMavenApp(File out) throws IOException {
+        if (out.exists()) {
+            FileUtils.deleteQuietly(out);
+        }
+        out.mkdirs();
+
+        FileUtils.copyDirectory(MAVEN_APP_ROOT, out);
     }
 
     public static void copyScalaApp(File out) throws IOException {

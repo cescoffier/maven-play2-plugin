@@ -133,7 +133,7 @@ public class Play2PackageMojo
         executor.setWorkingDirectory(project.getBasedir());
         executor.setExitValue(0);
         try {
-            executor.execute(cmdLine);
+            executor.execute(cmdLine, getEnvironment());
         } catch (IOException e) {
             throw new MojoExecutionException("Error during packaging", e);
         }
@@ -155,7 +155,7 @@ public class Play2PackageMojo
         executor.setWorkingDirectory(project.getBasedir());
         executor.setExitValue(0);
         try {
-            executor.execute(cmdLine);
+            executor.execute(cmdLine, getEnvironment());
         } catch (IOException e) {
             throw new MojoExecutionException("Error during distribution creation", e);
         }

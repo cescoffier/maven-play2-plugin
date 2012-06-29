@@ -64,7 +64,7 @@ public class Play2CleanMojo
         executor.setWorkingDirectory(project.getBasedir());
         executor.setExitValue(0);
         try {
-            executor.execute(cmdLine);
+            executor.execute(cmdLine, getEnvironment());
         } catch (IOException e) {
             throw new MojoExecutionException("Error during cleanup", e);
         }

@@ -47,7 +47,7 @@ public class Play2RunMojo
 
         executor.setExitValue(0);
         try {
-            executor.execute(cmdLine);
+            executor.execute(cmdLine, getEnvironment());
         } catch (IOException e) {
             // Ignore.
         }

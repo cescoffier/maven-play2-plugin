@@ -80,7 +80,7 @@ public class Play2TestMojo
 
         executor.setExitValue(0);
         try {
-            executor.execute(cmdLine);
+            executor.execute(cmdLine, getEnvironment());
         } catch (IOException e) {
             if (testFailureIgnore) {
                 getLog().error("Test execution failures ignored");

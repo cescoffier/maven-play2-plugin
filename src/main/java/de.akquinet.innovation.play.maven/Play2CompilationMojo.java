@@ -57,7 +57,7 @@ public class Play2CompilationMojo
         executor.setExitValue(0);
         executor.setWorkingDirectory(project.getBasedir());
         try {
-            executor.execute(cmdLine);
+            executor.execute(cmdLine, getEnvironment());
         } catch (IOException e) {
             throw new MojoExecutionException("Error during compilation", e);
         }

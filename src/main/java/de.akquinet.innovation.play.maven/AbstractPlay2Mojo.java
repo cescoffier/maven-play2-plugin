@@ -23,6 +23,9 @@ import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.MavenProjectHelper;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 /**
  * Common parent of all Play 2 Mojo
@@ -224,5 +227,30 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
      */
     public boolean isWindows() {
         return System.getProperty("os.name").toLowerCase().contains("win");
+    }
+
+    /**
+     * Gets the execution environment.
+     * This method builds a map containing the Maven properties to give to SBT invocations.
+     * It contains maven project data (GAV), pom properties, and system properties.
+     * @return the map of properties (<code><pre>key -> value</pre></code>)
+     */
+    public Map<String, String> getEnvironment() {
+        Map<String, String> env = new HashMap<String, String>();
+        // Build properties.
+        env.put("project.groupId", project.getGroupId());
+        env.put("project.artifactId", project.getArtifactId());
+        env.put("project.version", project.getVersion());
+
+        // Pom properties
+        Properties props = project.getProperties();
+        if (props != null) {
+            for (Map.Entry<Object, Object> entry : props.entrySet()) {
+                env.put(entry.getKey().toString(), entry.getValue().toString());
+            }
+        }
+
+        getLog().debug("Environment built : " + env);
+        return env;
     }
 }

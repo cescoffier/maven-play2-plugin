@@ -44,6 +44,9 @@ public class PlayCompilationMojoTest {
         Play2CompilationMojo mojo = new Play2CompilationMojo();
         mojo.project = mock(MavenProject.class);
         when(mojo.project.getBasedir()).thenReturn(baseDir);
+        when(mojo.project.getArtifactId()).thenReturn("my-artifact-id");
+        when(mojo.project.getGroupId()).thenReturn("my-group-id");
+        when(mojo.project.getVersion()).thenReturn("0.0.1");
 
         mojo.execute();
     }
@@ -61,6 +64,9 @@ public class PlayCompilationMojoTest {
         Play2CompilationMojo mojo = new Play2CompilationMojo();
         mojo.project = mock(MavenProject.class);
         when(mojo.project.getBasedir()).thenReturn(baseDir);
+        when(mojo.project.getArtifactId()).thenReturn("my-artifact-id");
+        when(mojo.project.getGroupId()).thenReturn("my-group-id");
+        when(mojo.project.getVersion()).thenReturn("0.0.1");
 
         mojo.execute();
     }

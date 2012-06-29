@@ -23,6 +23,7 @@ import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Checks the common methods of Play 2 mojos
@@ -40,6 +41,7 @@ public class Play2MojoTest {
     @After
     public void tearDown() {
         // Restore configuration
+        System.clearProperty(AbstractPlay2Mojo.ENV_PLAY2_HOME);
         if (old_play2_system_var != null) {
             System.setProperty(AbstractPlay2Mojo.ENV_PLAY2_HOME, old_play2_system_var);
         }
@@ -81,9 +83,14 @@ public class Play2MojoTest {
 
     @Test(expected = MojoExecutionException.class)
     public void testTimeout() throws MojoExecutionException {
+        System.clearProperty(AbstractPlay2Mojo.ENV_PLAY2_HOME);
         Play2CleanMojo mojo = new Play2CleanMojo();
         mojo.timeout = 1; // 1 ms is just not enough
         mojo.project = mock(MavenProject.class);
+        when(mojo.project.getArtifactId()).thenReturn("my-artifact-id");
+        when(mojo.project.getGroupId()).thenReturn("my-group-id");
+        when(mojo.project.getVersion()).thenReturn("0.0.1");
+
         mojo.execute();
     }
 

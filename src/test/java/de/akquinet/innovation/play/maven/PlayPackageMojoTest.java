@@ -64,6 +64,9 @@ public class PlayPackageMojoTest {
         when(mojo.project.getBuild()).thenReturn(build);
         when(mojo.project.getArtifact()).thenReturn(artifact);
         when(build.getFinalName()).thenReturn("app-1.0.0");
+        when(mojo.project.getArtifactId()).thenReturn("my-artifact-id");
+        when(mojo.project.getGroupId()).thenReturn("my-group-id");
+        when(mojo.project.getVersion()).thenReturn("0.0.1");
 
         mojo.execute();
 
@@ -110,6 +113,9 @@ public class PlayPackageMojoTest {
         when(mojo.project.getBuild()).thenReturn(build);
         when(mojo.project.getArtifact()).thenReturn(artifact);
         when(build.getFinalName()).thenReturn("app-1.0.0");
+        when(mojo.project.getArtifactId()).thenReturn("my-artifact-id");
+        when(mojo.project.getGroupId()).thenReturn("my-group-id");
+        when(mojo.project.getVersion()).thenReturn("0.0.1");
 
         mojo.execute();
 
@@ -151,6 +157,9 @@ public class PlayPackageMojoTest {
         when(mojo.project.getBuild()).thenReturn(build);
         when(mojo.project.getArtifact()).thenReturn(artifact);
         when(build.getFinalName()).thenReturn("app-1.0.0");
+        when(mojo.project.getArtifactId()).thenReturn("my-artifact-id");
+        when(mojo.project.getGroupId()).thenReturn("my-group-id");
+        when(mojo.project.getVersion()).thenReturn("0.0.1");
 
         mojo.execute();
 
@@ -189,6 +198,9 @@ public class PlayPackageMojoTest {
         when(mojo.project.getBuild()).thenReturn(build);
         when(mojo.project.getArtifact()).thenReturn(artifact);
         when(build.getFinalName()).thenReturn("app-1.0.0");
+        when(mojo.project.getArtifactId()).thenReturn("my-artifact-id");
+        when(mojo.project.getGroupId()).thenReturn("my-group-id");
+        when(mojo.project.getVersion()).thenReturn("0.0.1");
 
         mojo.execute();
 
@@ -226,6 +238,9 @@ public class PlayPackageMojoTest {
         when(mojo.project.getBuild()).thenReturn(build);
         when(mojo.project.getArtifact()).thenReturn(artifact);
         when(build.getFinalName()).thenReturn("app-1.0.0");
+        when(mojo.project.getArtifactId()).thenReturn("my-artifact-id");
+        when(mojo.project.getGroupId()).thenReturn("my-group-id");
+        when(mojo.project.getVersion()).thenReturn("0.0.1");
 
         mojo.execute();
 
@@ -263,6 +278,9 @@ public class PlayPackageMojoTest {
         when(mojo.project.getBuild()).thenReturn(build);
         when(mojo.project.getArtifact()).thenReturn(artifact);
         when(build.getFinalName()).thenReturn("app-1.0.0");
+        when(mojo.project.getArtifactId()).thenReturn("my-artifact-id");
+        when(mojo.project.getGroupId()).thenReturn("my-group-id");
+        when(mojo.project.getVersion()).thenReturn("0.0.1");
 
         mojo.execute();
 

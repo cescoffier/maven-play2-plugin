@@ -141,7 +141,7 @@ val appVersion = fromEnv("project.version").getOrElse("1.0-SNAPSHOT")
 </code></pre>
 
 <div class="alert alert-info">
-  The _project.artifactId_ and _project.version_ variables are set by the plugin.
+  The <em>project.artifactId</em> and <em>project.version</em> variables are set by the plugin.
 </div>
 
 <h2>Source and Test folders</h2>
@@ -174,8 +174,8 @@ resourceDirectory in Compile &lt;&lt;= baseDirectory / "src/main/conf"
 <p>You can move the <em>application.conf</em>, <em>routes</em> and others configuration files into this folder.</p>
 
 <div class="alert alert-info">
-  The _play_ executable is checking for the existence of _conf/application.conf_ to detect whether or not the folder
-  contains a Play application. So, you still need a _conf/application.conf_ file, but this file can be empty.
+  The <em>play</em> executable is checking for the existence of <em>conf/application.conf</em> to detect whether or not the folder
+  contains a Play application. So, you still need a <em>conf/application.conf</em> file, but this file can be empty.
 </div>
 
 <h2>Static Assets</h2>

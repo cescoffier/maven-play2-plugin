@@ -58,7 +58,7 @@ You can move the _application.conf_, _routes_ and others configuration files int
 Static Assets
 -------------
 
-Changing the _public_ folder is a bit more complex as it requires two manipulations. First, in _ _project/Build.scala_, in
+Changing the _public_ folder is a bit more complex as it requires two manipulations. First, in _project/Build.scala_, in
 the project settings add:
 
     playAssetsDirectories := Seq.empty[File],
@@ -73,8 +73,12 @@ Then open the _route_ file and change the reference to _/public_ to:
 What can't be adapted right now
 -------------------------------
 
-    * The _dist_ folder can be set, but this settings is ignored by Play. It should be fixed in Play 2.1.
-    * The _lib_ folder including the unmanaged dependencies cannot be moved. SBT supports this settings, but it seems
+* The _dist_ folder can be set, but this settings is ignored by Play. It should be fixed in Play 2.1.
+* The _lib_ folder including the unmanaged dependencies cannot be moved. SBT supports this settings, but it seems
     ignored by Play.
+
+
+    unmanagedBase <<= baseDirectory { base => base / "target/lib" }
+
 
 

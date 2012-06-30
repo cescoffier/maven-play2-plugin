@@ -84,6 +84,16 @@
                 <github>robinp</github>
             </properties>
         </contributor>
+
+        <contributor>
+            <name>Sam Spycher</name>
+            <email />
+            <url />
+            <organization />
+            <properties>
+                <github>samspycher</github>
+            </properties>
+        </contributor>
     </contributors>
 
     <properties>

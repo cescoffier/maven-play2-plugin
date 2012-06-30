@@ -143,7 +143,7 @@
 <a class="jxr_linenumber" name="133" href="#133">133</a>         executor.setWorkingDirectory(project.getBasedir());
 <a class="jxr_linenumber" name="134" href="#134">134</a>         executor.setExitValue(0);
 <a class="jxr_linenumber" name="135" href="#135">135</a>         <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="136" href="#136">136</a>             executor.execute(cmdLine);
+<a class="jxr_linenumber" name="136" href="#136">136</a>             executor.execute(cmdLine, getEnvironment());
 <a class="jxr_linenumber" name="137" href="#137">137</a>         } <strong class="jxr_keyword">catch</strong> (IOException e) {
 <a class="jxr_linenumber" name="138" href="#138">138</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> MojoExecutionException(<span class="jxr_string">"Error during packaging"</span>, e);
 <a class="jxr_linenumber" name="139" href="#139">139</a>         }
@@ -165,7 +165,7 @@
 <a class="jxr_linenumber" name="155" href="#155">155</a>         executor.setWorkingDirectory(project.getBasedir());
 <a class="jxr_linenumber" name="156" href="#156">156</a>         executor.setExitValue(0);
 <a class="jxr_linenumber" name="157" href="#157">157</a>         <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="158" href="#158">158</a>             executor.execute(cmdLine);
+<a class="jxr_linenumber" name="158" href="#158">158</a>             executor.execute(cmdLine, getEnvironment());
 <a class="jxr_linenumber" name="159" href="#159">159</a>         } <strong class="jxr_keyword">catch</strong> (IOException e) {
 <a class="jxr_linenumber" name="160" href="#160">160</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> MojoExecutionException(<span class="jxr_string">"Error during distribution creation"</span>, e);
 <a class="jxr_linenumber" name="161" href="#161">161</a>         }

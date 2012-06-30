@@ -102,7 +102,4 @@ What can't be adapted right now
 
 
 
-    unmanagedBase <<= baseDirectory { base => base / "target/lib" }
-
-
 

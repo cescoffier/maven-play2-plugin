@@ -63,7 +63,7 @@ For each _play_ invocations, the plugin build an environment containing the Mave
 * _project.groupId_ : the Maven group Id
 * _project.artifactId_ : the Maven artifact Id
 * _project.version_ : the Maven version
-* all other Maven properties_
+* all other Maven properties
 
 So, to keep your version in sync, you need to edit your _project/Build.scala_ file and add:
 
@@ -71,10 +71,10 @@ So, to keep your version in sync, you need to edit your _project/Build.scala_ fi
       case null => None
       case value => Some(value)
     }
-
     val appName = fromEnv("project.artifactId").getOrElse("my-app")
     val appVersion = fromEnv("project.version").getOrElse("1.0-SNAPSHOT")
     // ...
 
+Check [this page](./structure.html) for more information.
 
 

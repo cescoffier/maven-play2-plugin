@@ -188,7 +188,7 @@ play2-maven-plugin manages this issue by using directly the play 2 executable fr
 <li><em>project.groupId</em> : the Maven group Id</li>
 <li><em>project.artifactId</em> : the Maven artifact Id</li>
 <li><em>project.version</em> : the Maven version</li>
-<li>all other Maven properties_</li>
+<li>all other Maven properties</li>
 </ul>
 
 <p>So, to keep your version in sync, you need to edit your <em>project/Build.scala</em> file and add:</p>
@@ -197,11 +197,12 @@ play2-maven-plugin manages this issue by using directly the play 2 executable fr
   case null =&gt; None
   case value =&gt; Some(value)
 }
-
 val appName = fromEnv("project.artifactId").getOrElse("my-app")
 val appVersion = fromEnv("project.version").getOrElse("1.0-SNAPSHOT")
 // ...
 </code></pre>
+
+<p>Check <a href="./structure.html">this page</a> for more information.</p>
 
                   </div>
             </div>

@@ -70,12 +70,36 @@ Then open the _route_ file and change the reference to _/public_ to:
     # Map static resources from the /src/main/resources folder to the /assets URL path
     GET     /assets/*file               controllers.Assets.at(path="/src/main/resources", file)
 
+Unmanaged Dependencies
+----------------------
+
+Play is using the _lib_ folder to store _unmanaged_ dependencies (i.e. dependencies not managed by SBT). The plugin
+populates this folder with the Maven dependencies declared in the project. By default, to be compatible with the
+default Play layyout, it use the _lib_ directory. However you can change it. In order to move this location to
+_target/lib_ you need to edit two files.
+
+First, open the _project/Build.scala_ file and in the project settings add:
+
+    unmanagedBase <<= baseDirectory { base => base / "target/lib" }
+
+Then, open the project _pom.xml_ file and change the ${project.artifactId} configuration to:
+
+    <plugin>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${project.artifactId}</artifactId>
+        <version>${project.version}</version>
+        <extensions>true</extensions>
+        <configuration>
+            <lib>target/lib</lib>
+        </configuration>
+    </plugin>
+
+
 What can't be adapted right now
 -------------------------------
 
 * The _dist_ folder can be set, but this settings is ignored by Play. It should be fixed in Play 2.1.
-* The _lib_ folder including the unmanaged dependencies cannot be moved. SBT supports this settings, but it seems
-    ignored by Play.
+
 
 
     unmanagedBase <<= baseDirectory { base => base / "target/lib" }

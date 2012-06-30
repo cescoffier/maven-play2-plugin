@@ -30,7 +30,6 @@
                     </clean>
                     <process-resources>
                         org.apache.maven.plugins:maven-resources-plugin:resources,
-                        de.akquinet.innovation.play2:play2-maven-plugin:update-sbt-build,
                         de.akquinet.innovation.play2:play2-maven-plugin:copy-dependencies
                     </process-resources>
                     <compile>

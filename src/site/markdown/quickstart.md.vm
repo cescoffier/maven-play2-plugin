@@ -120,6 +120,12 @@ Finally, to run the application:
 
     mvn play2:run
 
+Using the regular Maven structure
+---------------------------------
+
+By default the plugin is configured to use the Play directory structure. But it can be configured to use the Maven
+structure. Check [this page](./structure.html) for more information.
+
 Setting Play 2 location from the pom file
 -----------------------------------------
 

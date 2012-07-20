@@ -225,7 +225,7 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
      *
      * @return <code>true</code> if the os is windows, <code>false</code> otherwise.
      */
-    public boolean isWindows() {
+    /* package */ static boolean isWindows() {
         return System.getProperty("os.name").toLowerCase().contains("win");
     }
 

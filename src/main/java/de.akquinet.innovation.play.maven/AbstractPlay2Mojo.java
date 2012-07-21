@@ -237,6 +237,10 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
      */
     public Map<String, String> getEnvironment() {
         Map<String, String> env = new HashMap<String, String>();
+        
+        // Environment variables
+        env.putAll( System.getenv() );
+
         // Build properties.
         env.put("project.groupId", project.getGroupId());
         env.put("project.artifactId", project.getArtifactId());
@@ -249,7 +253,15 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
                 env.put(entry.getKey().toString(), entry.getValue().toString());
             }
         }
-
+        
+        // System properties
+        props = System.getProperties();
+        if (props != null) {
+            for (Map.Entry<Object, Object> entry : props.entrySet()) {
+                env.put(entry.getKey().toString(), entry.getValue().toString());
+            }
+        }
+        
         getLog().debug("Environment built : " + env);
         return env;
     }

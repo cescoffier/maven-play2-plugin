@@ -7,7 +7,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import java.io.IOException;
 
 /**
- * Launch the Play application in debug mode (play debug)
+ * Launch the Play application in debug mode (play debug run)
  *
  * @goal debug
  * @requiresProject false

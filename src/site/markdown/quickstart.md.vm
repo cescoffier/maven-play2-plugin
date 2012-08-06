@@ -116,6 +116,10 @@ To package the application without running the tests:
 
     mvn package -DskipTests
 
+To debug the application:
+
+    mvn play2:debug
+
 Finally, to run the application:
 
     mvn play2:run

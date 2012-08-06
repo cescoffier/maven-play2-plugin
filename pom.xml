@@ -94,6 +94,16 @@
                 <github>samspycher</github>
             </properties>
         </contributor>
+        
+        <contributor>
+            <name>Shane Witbeck</name>
+            <email />
+            <url>http://digitalsanctum.com</url>
+            <organization />
+            <properties>
+                <github>digitalsanctum</github>
+            </properties>
+        </contributor>
     </contributors>
 
     <properties>

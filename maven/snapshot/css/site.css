@@ -1,1 +1,5 @@
-/* You can override this file with your own styles */
+
+/* Hide the power by maven **ugly** logo */
+.poweredBy {
+    display: none;
+}

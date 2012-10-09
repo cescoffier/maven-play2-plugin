@@ -253,6 +253,12 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
                 env.put(entry.getKey().toString(), entry.getValue().toString());
             }
         }
+
+        // Environment properties
+        Map<String, String> environment = System.getenv();
+        for (String k : environment.keySet()) {
+            env.put(k, environment.get(k));
+        }
         
         // System properties
         props = System.getProperties();

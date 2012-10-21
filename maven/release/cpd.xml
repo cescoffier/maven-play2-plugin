@@ -2,7 +2,8 @@
 <pmd-cpd>
 <duplication lines="20" tokens="112">
 <file line="114" path="/Users/clement/Projects/ats-bilderverwaltung/maven-play2-plugin/maven-play2-plugin/target/checkout/target/generated-sources/plugin/de/akquinet/innovation/play/maven/HelpMojo.java"/>
-<file line="222" path="/Users/clement/Projects/ats-bilderverwaltung/maven-play2-plugin/maven-play2-plugin/target/checkout/target/generated-sources/plugin/de/akquinet/innovation/play/maven/HelpMojo.java"/>
+<file line="152" path="/Users/clement/Projects/ats-bilderverwaltung/maven-play2-plugin/maven-play2-plugin/target/checkout/target/generated-sources/plugin/de/akquinet/innovation/play/maven/HelpMojo.java"/>
+<file line="266" path="/Users/clement/Projects/ats-bilderverwaltung/maven-play2-plugin/maven-play2-plugin/target/checkout/target/generated-sources/plugin/de/akquinet/innovation/play/maven/HelpMojo.java"/>
 <codefragment>
 <![CDATA[
             append( sb, "Launch the Play application", 1 );

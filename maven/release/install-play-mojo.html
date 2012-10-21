@@ -7,7 +7,8 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
+    <title>
+    play2:install-play</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -77,8 +78,8 @@
                           <a href="usage.html" title="Usage">Usage</a>
             </li>
                   <li class="none">
-            <strong>Quickstart</strong>
-          </li>
+                          <a href="quickstart.html" title="Quickstart">Quickstart</a>
+            </li>
                   <li class="none">
                           <a href="structure.html" title="Using the Maven Structure">Using the Maven Structure</a>
             </li>
@@ -122,163 +123,78 @@
         
         <div id="bodyColumn"  class="span9" >
                                   
-            <h1>Quickstart Guide</h1>
-
-<p>This page explains how to use the play2-maven-plugin to build your Play 2 application using Maven.</p>
-
-<h2>Prerequisites</h2>
-
-<p>Create a Play 2 application using the <em>play</em> command:</p>
-
-<pre><code>play new myFirstApp
-</code></pre>
-
-<p>This command creates the Play 2 application. Obviously it's not required if you already have an existing application.</p>
-
-<h2>Mavenization</h2>
-
-<p>At the root of the created project, create a <em>pom.xml</em> file with the following content:</p>
-
-<pre><code>&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"&gt;
-    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-
-    &lt;groupId&gt;your.group.id&lt;/groupId&gt;
-    &lt;artifactId&gt;your.artifact.id&lt;/artifactId&gt;
-    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
-    &lt;name&gt;myFirstApp&lt;/name&gt;
-
-    &lt;packaging&gt;play2&lt;/packaging&gt;
-
-    &lt;repositories&gt;
-        &lt;repository&gt;
-            &lt;id&gt;typesafe&lt;/id&gt;
-            &lt;url&gt;http://repo.typesafe.com/typesafe/releases/&lt;/url&gt;
-        &lt;/repository&gt;
-    &lt;/repositories&gt;
-
-    &lt;dependencies&gt;
-        &lt;!--
-        Add your dependencies here (modules, libraries...).
-        Dependencies in the compile scope will be embedded within the application.
-        --&gt;
-
-
-        &lt;!-- Play Framework Dependencies --&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;play&lt;/groupId&gt;
-            &lt;artifactId&gt;play_2.9.1&lt;/artifactId&gt;
-            &lt;version&gt;2.0&lt;/version&gt;
-            &lt;scope&gt;provided&lt;/scope&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;play&lt;/groupId&gt;
-            &lt;artifactId&gt;play-test_2.9.1&lt;/artifactId&gt;
-            &lt;version&gt;2.0&lt;/version&gt;
-            &lt;scope&gt;provided&lt;/scope&gt;
-        &lt;/dependency&gt;
-
-    &lt;/dependencies&gt;
-
-    &lt;build&gt;
-        &lt;!-- Play source directory --&gt;
-        &lt;sourceDirectory&gt;app&lt;/sourceDirectory&gt;
-        &lt;testSourceDirectory&gt;test&lt;/testSourceDirectory&gt;
-
-        &lt;plugins&gt;
-
-            &lt;plugin&gt;
-                &lt;groupId&gt;de.akquinet.innovation.play2&lt;/groupId&gt;
-                &lt;artifactId&gt;play2-maven-plugin&lt;/artifactId&gt;
-                &lt;version&gt;1.2.1&lt;/version&gt;
-                &lt;extensions&gt;true&lt;/extensions&gt;
-            &lt;/plugin&gt;
-
-            &lt;plugin&gt;
-                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-                &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
-                &lt;version&gt;2.3.1&lt;/version&gt;
-                &lt;configuration&gt;
-                    &lt;source&gt;1.6&lt;/source&gt;
-                    &lt;target&gt;1.6&lt;/target&gt;
-                &lt;/configuration&gt;
-            &lt;/plugin&gt;
-
-        &lt;/plugins&gt;
-
-    &lt;/build&gt;
-
-&lt;/project&gt;
-
-That's it !
-</code></pre>
-
-<h2>Usage</h2>
-
-<p>Before starting, be sure to have the <em>play</em> executable in your path or to have defined the <em>PLAY2_HOME</em> system variable
- used by the plugin to find the Play 2 SDK (or check the next section). As shown in the previous pom file, the packaging
-  of your project must be <em>play2</em>.</p>
-
-<p>To define the <em>PLAY2_HOME</em> variable on Mac/Linux use:</p>
-
-<pre><code>export PLAY2_HOME=...
-# or
-mvn clean install -DPLAY2_HOME=...
-</code></pre>
-
-<p>To build the application, simply run:</p>
-
-<pre><code>mvn clean install
-</code></pre>
-
-<p>To compile and test only:</p>
-
-<pre><code>mvn test
-</code></pre>
-
-<p>To package the application without running the tests:</p>
-
-<pre><code>mvn package -DskipTests
-</code></pre>
-
-<p>To debug the application:</p>
-
-<pre><code>mvn play2:debug
-</code></pre>
-
-<p>Finally, to run the application:</p>
-
-<pre><code>mvn play2:run
-</code></pre>
-
-<h2>Using the regular Maven structure</h2>
-
-<p>By default the plugin is configured to use the Play directory structure. But it can be configured to use the Maven
-structure. Check <a href="./structure.html">this page</a> for more information.</p>
-
-<h2>Setting Play 2 location from the pom file</h2>
-
-<p>The <em>PLAY2</em> location can also be defined in the <em>pom.xml</em> file such as in:</p>
-
-<pre><code>  &lt;plugin&gt;
-    &lt;groupId&gt;de.akquinet.innovation.play2&lt;/groupId&gt;
-    &lt;artifactId&gt;play2-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;1.2.1&lt;/version&gt;
-    &lt;extensions&gt;true&lt;/extensions&gt;
-      &lt;configuration&gt;
-        &lt;play2Home&gt;some/path/to/play-2.0&lt;/play2Home&gt;
-      &lt;/configuration&gt;
-  &lt;/plugin&gt;
-</code></pre>
-
-<p>The plugin is checking in this order:</p>
-
-<ul>
-<li>the PLAY2_HOME system variable (set with -DPLAY2_HOME=...)</li>
-<li>the <em>play2Home</em> setting</li>
-<li>the PLAY2_HOME environment variable</li>
-</ul>
-
-<p>If <em>PLAY2_HOME</em> is not define, the plugin use the system <em>PATH</em>, and looks for the <em>play</em> or <em>play.bat</em> executable.</p>
+            
+  
+    <div class="section"><h2>play2:install-play<a name="play2:install-play"></a></h2>
+      <p><b>Full name</b>:</p>
+      <p>de.akquinet.innovation.play2:play2-maven-plugin:1.2.1:install-play</p>
+      <p><b>Description</b>:</p>
+      <div>Download and install a Play! distribution.</div>
+      <p><b>Attributes</b>:</p>
+      <div class="section"><h3>Optional Parameters<a name="Optional_Parameters"></a></h3>
+        <table class="table table-striped" border="0">
+          <tr class="a">
+            <th>Name</th>
+            <th>Type</th>
+            <th>Since</th>
+            <th>Description</th>
+          </tr>
+          <tr class="b">
+            <td><b><a href="#play2basedir">play2basedir</a></b></td>
+            <td><tt>String</tt></td>
+            <td><tt>-</tt></td>
+            <td>The directory where automatically installed Play! distributions are
+extracted. It's highly recommended that you set this configuration
+parameter to a directory of your choice. If not set its defaulted
+to project build directory. It means that a <tt>clean</tt> command
+will first downoad and install specified Play! distribution and
+then wipe it. After that next plugin goal will download and install
+again. It's not optimal but provides a default behavior that works.
+If set the plugin will download Play! distribution in this
+directory and extract them inside it.<br /><b>Default value is</b>: <tt>${project.build.directory}</tt>.</td>
+          </tr>
+          <tr class="a">
+            <td><b><a href="#play2version">play2version</a></b></td>
+            <td><tt>String</tt></td>
+            <td><tt>-</tt></td>
+            <td>Defines a Play! version to automatically install. If not set,
+PLAY2_HOME detection takes place and Play! is not automatically
+installed. If set the plugin will download and install specified
+Play! distribution. See the <tt>play2basedir</tt> configuration
+paramenter to set an install directory.<br /></td>
+          </tr>
+        </table>
+      </div>
+      <div class="section"><h3>Parameter Details<a name="Parameter_Details"></a></h3>
+        <p><b><a name="play2basedir">play2basedir</a>:</b></p>
+        <div>The directory where automatically installed Play! distributions are
+extracted. It's highly recommended that you set this configuration
+parameter to a directory of your choice. If not set its defaulted
+to project build directory. It means that a <tt>clean</tt> command
+will first downoad and install specified Play! distribution and
+then wipe it. After that next plugin goal will download and install
+again. It's not optimal but provides a default behavior that works.
+If set the plugin will download Play! distribution in this
+directory and extract them inside it.</div>
+        <ul>
+          <li><b>Type</b>: <tt>java.lang.String</tt></li>
+          <li><b>Required</b>: <tt>No</tt></li>
+          <li><b>Expression</b>: <tt>${play2basedir}</tt></li>
+          <li><b>Default</b>: <tt>${project.build.directory}</tt></li>
+        </ul><hr /><p><b><a name="play2version">play2version</a>:</b></p>
+        <div>Defines a Play! version to automatically install. If not set,
+PLAY2_HOME detection takes place and Play! is not automatically
+installed. If set the plugin will download and install specified
+Play! distribution. See the <tt>play2basedir</tt> configuration
+paramenter to set an install directory.</div>
+        <ul>
+          <li><b>Type</b>: <tt>java.lang.String</tt></li>
+          <li><b>Required</b>: <tt>No</tt></li>
+          <li><b>Expression</b>: <tt>${play2version}</tt></li>
+        </ul>
+      </div>
+    </div>
+  
 
                   </div>
             </div>

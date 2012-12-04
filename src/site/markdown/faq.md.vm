@@ -5,7 +5,10 @@
   fork the <a href="https://github.com/cescoffier/maven-play2-plugin/">project</a>, improve the documentation and send a pull request.
 </div>
 
-<a name="My_IDE_is_complaining_about_missing_classes"></a>
+<div id="toc" class="well">
+</div>
+
+<a class="entry" name="My_IDE_is_complaining_about_missing_classes"></a>
 My IDE is complaining about missing classes (views, routes...)
 --------------------------------------------------------------
 
@@ -40,7 +43,7 @@ automatically:
     </plugin>
 
 
-<a name="Homebrew"></a>
+<a class="entry" name="Homebrew"></a>
 My Homebrew installation from play 2 does not work
 --------------------------------------------------
 
@@ -54,7 +57,7 @@ When <tt>PLAY2_HOME</tt> is using a [homebrew](http://mxcl.github.com/homebrew/)
 The problem comes from the homebrew installation of play using relative directories. The versions 1.2.0+ of the
 ${project.artifactId} manages this issue by using directly the play 2 executable from "/usr/local/bin/play"
 
-<a name="MavenSbtSync"></a>
+<a class="entry" name="MavenSbtSync"></a>
 How do I keep in sync my SBT Metadata and my Maven metadata ?
 -------------------------------------------------------------
 
@@ -77,4 +80,28 @@ So, to keep your version in sync, you need to edit your _project/Build.scala_ fi
 
 Check [this page](./structure.html) for more information.
 
+<a class="entry" name="WindowsExitError"></a>
+On Windows, the build is not failing when compilation or tests failed ?
+----------------------------------------------------------------------
 
+With Play 2.0.4+, the Maven build is not marked as failing if the compilation or the tests fails. The issue comes from the `play.bat` file that does not return a valid error code. To overcome this problem you have to update play.bat file replacing last line:
+
+    endlocal
+
+with
+
+    exit /b %errorlevel%
+    endlocal
+
+
+<!-- SCRIPT generating the TOC -->
+<script>
+    var toc = $("#toc");
+    var list = $(toc).append($("<ol>"));
+    $("a.entry").each(function(index, elem) { 
+        var anchor = elem.name; 
+        var title = $(elem).parent().next("h2").html(); 
+        var item = $("<li><a href=\"#" + anchor + "\">" + title + "</a></li>"); 
+        list.append(item); 
+    });
+</script>

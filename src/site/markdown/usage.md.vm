@@ -136,6 +136,34 @@ You can set the packaging classifier, applied to both packages (jar and zip):
         [...]
     </project>
 
+Adding files to distribution package
+------------------------------------
+You can set additional files to be appended to the play framework distribution zip file. This is done after the zip file
+has been generated. All additional files are added to the top-level directory of the zip file (at the same level as the ./lib
+and start script).
+
+    <project>
+        [...]
+        <packaging>play2</packaging>
+        [...]
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>${project.artifactId}</artifactId>
+                    <version>${project.version}</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <additionalFiles>
+                            <additionalFile>${basedir}/your-start-script</additionalFile>
+                        </additionalFiles>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </build>
+        [...]
+    </project>
+
 Downloading and installing Play 2 distributions
 -----------------------------------------------
 

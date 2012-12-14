@@ -15,6 +15,10 @@
 
 package de.akquinet.innovation.play.maven;
 
+import net.lingala.zip4j.core.ZipFile;
+import net.lingala.zip4j.exception.ZipException;
+import net.lingala.zip4j.model.ZipParameters;
+import net.lingala.zip4j.util.Zip4jConstants;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.ExecuteWatchdog;
@@ -27,7 +31,9 @@ import org.apache.maven.plugin.MojoExecutionException;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Package the Play application.
@@ -69,6 +75,13 @@ public class Play2PackageMojo
      */
     boolean deleteDist;
 
+    /**
+     * Allows customization of the play packaging. The files specified in this attribute will get added to the distribution
+     * zip file. This allows, for example, to write your own start script and have it packaged in the distribution.
+     * This is done post-packaging by the play framework.
+     * @parameter
+     */
+    List<String> additionalFiles = new ArrayList<String>();
 
     public void execute()
             throws MojoExecutionException {
@@ -82,8 +95,46 @@ public class Play2PackageMojo
         if (buildDist) {
             packageDistribution();
             dist = moveDistributionArtifactToTarget();
+
+            if (!additionalFiles.isEmpty()) {
+                packageAdditionalFiles(additionalFiles, dist);
+            }
         }
         attachArtifactsToProject(packagedApplication, dist);
+    }
+
+    private void packageAdditionalFiles(List<String> additionalFiles, File distributionFile) throws MojoExecutionException {
+        try {
+            ZipFile zipFile = new ZipFile(distributionFile);
+
+            ArrayList<File> filesToAdd = new ArrayList<File>(additionalFiles.size());
+            for (String file : additionalFiles) {
+                File fileToAdd = new File(file);
+                if (!fileToAdd.exists()) {
+                    throw new MojoExecutionException(fileToAdd.getCanonicalPath() + " not found, can't add to package");
+                }
+                filesToAdd.add(fileToAdd);
+
+                ZipParameters parameters = new ZipParameters();
+                parameters.setCompressionLevel(Zip4jConstants.DEFLATE_LEVEL_FASTEST);
+                parameters.setIncludeRootFolder(true);
+                // Let's safely assume that the zip filename is also the root directory all files are packaged in
+                parameters.setRootFolderInZip(StringUtils.substringBeforeLast(distributionFile.getName(), ".zip"));
+                parameters.setReadHiddenFiles(true);
+
+                String message = String.format("Adding files to distribution zip [%s]: \n\t%s",
+                        distributionFile.getCanonicalPath(), StringUtils.join(additionalFiles, "\n\t"));
+                getLog().info(message);
+
+                zipFile.addFiles(filesToAdd, parameters);
+            }
+        }
+        catch (ZipException e) {
+            throw new MojoExecutionException("Cannot add files to zipfile: " + distributionFile, e);
+        }
+        catch (IOException e) {
+            throw new MojoExecutionException("Cannot add files to zipfile: " + distributionFile, e);
+        }
     }
 
     private File moveApplicationPackageToTarget() throws MojoExecutionException {

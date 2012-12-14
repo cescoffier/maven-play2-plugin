@@ -104,6 +104,16 @@
                 <github>digitalsanctum</github>
             </properties>
         </contributor>
+
+        <contributor>
+            <name>Alexandre Normand</name>
+            <email />
+            <url>http://heyitsalex.net</url>
+            <organization />
+            <properties>
+                <github>alexandre-normand</github>
+            </properties>
+        </contributor>
     </contributors>
 
     <properties>

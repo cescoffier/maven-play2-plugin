@@ -25,9 +25,14 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.when;
 
 /**
  * Test the Packaging Mojo.
@@ -130,6 +135,54 @@ public class PlayPackageMojoTest {
 
         // Assert deleteDist option behavior
         assertThat(new File(baseDir, "dist")).exists();
+    }
+
+    /**
+     * This test checks that additionalFiles get packaged in the distribution zip
+     * @throws IOException
+     * @throws MojoExecutionException
+     */
+    @Test
+    public void testPackagingOfAdditionalFiles() throws IOException, MojoExecutionException {
+        if (! Helper.detectPlay2()) {
+            System.err.println("PLAY2_HOME missing, skipping tests");
+            return;
+        }
+
+        File baseDir = new File("target/tests/testPackagingOfScalaApplication");
+        Helper.copyScalaApp(baseDir);
+
+        Play2PackageMojo mojo = new Play2PackageMojo();
+
+        mojo.project = mock(MavenProject.class);
+        mojo.projectHelper = mock(MavenProjectHelper.class);
+        mojo.attachDist = true;
+        mojo.buildDist = true;
+        mojo.deleteDist = false;
+        mojo.additionalFiles.add("src/test/resources/AdditionalFile.txt");
+        mojo.setLog(new SystemStreamLog());
+        Build build = mock(Build.class);
+        Artifact artifact = mock(Artifact.class);
+
+        when(mojo.project.getBasedir()).thenReturn(baseDir);
+        when(mojo.project.getBuild()).thenReturn(build);
+        when(mojo.project.getArtifact()).thenReturn(artifact);
+        when(build.getFinalName()).thenReturn("app-1.0.0");
+        when(mojo.project.getArtifactId()).thenReturn("my-artifact-id");
+        when(mojo.project.getGroupId()).thenReturn("my-group-id");
+        when(mojo.project.getVersion()).thenReturn("0.0.1");
+
+        mojo.execute();
+
+        // Verify attached file
+        File target = new File(baseDir, "target");
+        File dist = new File(target, "app-1.0.0.zip");
+        assertThat(dist).exists();
+
+        // Verify that the additional file was packaged correctly.
+        ZipFile distZip = new ZipFile(dist);
+        ZipEntry additionalFileEntry = distZip.getEntry("app-1.0.0/AdditionalFile.txt");
+        assertThat(additionalFileEntry).isNotNull();
     }
 
     @Test

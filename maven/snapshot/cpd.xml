@@ -1,32 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pmd-cpd>
-<duplication lines="20" tokens="112">
-<file line="114" path="/Users/clement/Projects/ats-bilderverwaltung/maven-play2-plugin/maven-play2-plugin/target/generated-sources/plugin/de/akquinet/innovation/play/maven/HelpMojo.java"/>
-<file line="152" path="/Users/clement/Projects/ats-bilderverwaltung/maven-play2-plugin/maven-play2-plugin/target/generated-sources/plugin/de/akquinet/innovation/play/maven/HelpMojo.java"/>
-<file line="266" path="/Users/clement/Projects/ats-bilderverwaltung/maven-play2-plugin/maven-play2-plugin/target/generated-sources/plugin/de/akquinet/innovation/play/maven/HelpMojo.java"/>
-<codefragment>
-<![CDATA[
-            append( sb, "Launch the Play application", 1 );
-            append( sb, "", 0 );
-            if ( detail )
-            {
-                append( sb, "Available parameters:", 1 );
-                append( sb, "", 0 );
-
-                append( sb, "play2Home", 2 );
-                append( sb, "The PLAY2_HOME path is taken from this setting, if not found as a Java system property (-DPLAY2_HOME). Refers to the PLAY2_HOME environment variable by default. So that means that the PLAY2_HOME can be given using:\n1.\tA system variable defined by the system or with -DPLAY2_HOME=...\n2.\tThe play2Home configuration property\n3.\tThe PLAY2_HOME environment property\n", 3 );
-                append( sb, "Expression: ${env.PLAY2_HOME}", 3 );
-                append( sb, "", 0 );
-
-                append( sb, "timeout (Default: -1)", 2 );
-                append( sb, "Sets a timeout to the play invocation (in milliseconds). If not set (or set to -1, the plugin waits until the underlying play process completes. If set, the plugin kills the underlying play process when the timeout is reached, and it fails the build.", 3 );
-                append( sb, "Expression: ${play2timeout}", 3 );
-                append( sb, "", 0 );
-            }
-        }
-
-        if ( goal == null || goal.length() <= 0 || "test".equals( goal ) )
-]]>
-</codefragment>
-</duplication>
 </pmd-cpd>

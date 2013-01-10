@@ -88,7 +88,7 @@ At the root of the created project, create a _pom.xml_ file with the following c
 
     </project>
 
-    That's it !
+That's it !
 
 Usage
 -----

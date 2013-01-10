@@ -234,75 +234,7 @@
                 
         <div id="bodyColumn"  class="span9" >
                                   
-            <div class="section"><h2>CPD Results<a name="CPD_Results"></a></h2><p>The following document contains the results of PMD's  <a class="externalLink" href="http://pmd.sourceforge.net/cpd.html">CPD</a> 4.2.5.</p></div><div class="section"><h2>Duplications<a name="Duplications"></a></h2><table border="0" class="table table-striped"><tr class="a"><th>File</th><th>Line</th></tr><tr class="b"><td>de/akquinet/innovation/play/maven/HelpMojo.java</td><td><a href="./xref/de/akquinet/innovation/play/maven/HelpMojo.html#124">124</a></td></tr><tr class="a"><td>de/akquinet/innovation/play/maven/HelpMojo.java</td><td><a href="./xref/de/akquinet/innovation/play/maven/HelpMojo.html#172">172</a></td></tr><tr class="b"><td colspan='2'><div><pre>            append( sb, &quot;Launch the Play application&quot;, 1 );
-            append( sb, &quot;&quot;, 0 );
-            if ( detail )
-            {
-                append( sb, &quot;Available parameters:&quot;, 1 );
-                append( sb, &quot;&quot;, 0 );
-
-                append( sb, &quot;baseDirectory&quot;, 2 );
-                append( sb, &quot;Base directory of the project.&quot;, 3 );
-                append( sb, &quot;Expression: ${basedir}&quot;, 3 );
-                append( sb, &quot;&quot;, 0 );
-
-                append( sb, &quot;buildDirectory&quot;, 2 );
-                append( sb, &quot;Directory containing the build files.&quot;, 3 );
-                append( sb, &quot;Expression: ${project.build.directory}&quot;, 3 );
-                append( sb, &quot;&quot;, 0 );
-
-                append( sb, &quot;play2Home&quot;, 2 );
-                append( sb, &quot;The PLAY2_HOME path is taken from this setting, if not found as a Java system property (-DPLAY2_HOME). Refers to the PLAY2_HOME environment variable by default. So that means that the PLAY2_HOME can be given using:\n1.\tA system variable defined by the system or with -DPLAY2_HOME=...\n2.\tThe play2Home configuration property\n3.\tThe PLAY2_HOME environment property\n&quot;, 3 );
-                append( sb, &quot;Expression: ${env.PLAY2_HOME}&quot;, 3 );
-                append( sb, &quot;&quot;, 0 );
-
-                append( sb, &quot;timeout (Default: -1)&quot;, 2 );
-                append( sb, &quot;Sets a timeout to the play invocation (in milliseconds). If not set (or set to -1, the plugin waits until the underlying play process completes. If set, the plugin kills the underlying play process when the timeout is reached, and it fails the build.&quot;, 3 );
-                append( sb, &quot;Expression: ${play2timeout}&quot;, 3 );
-                append( sb, &quot;&quot;, 0 );
-            }
-        }
-
-        if ( goal == null || goal.length() &lt;= 0 || &quot;test&quot;.equals( goal ) )</pre></div></td></tr></table><table border="0" class="table table-striped"><tr class="a"><th>File</th><th>Line</th></tr><tr class="b"><td>de/akquinet/innovation/play/maven/HelpMojo.java</td><td><a href="./xref/de/akquinet/innovation/play/maven/HelpMojo.html#124">124</a></td></tr><tr class="a"><td>de/akquinet/innovation/play/maven/HelpMojo.java</td><td><a href="./xref/de/akquinet/innovation/play/maven/HelpMojo.html#395">395</a></td></tr><tr class="b"><td colspan='2'><div><pre>            append( sb, &quot;Run the test of the Play application. The tests are run using play test&quot;, 1 );
-            append( sb, &quot;&quot;, 0 );
-            if ( detail )
-            {
-                append( sb, &quot;Available parameters:&quot;, 1 );
-                append( sb, &quot;&quot;, 0 );
-
-                append( sb, &quot;baseDirectory&quot;, 2 );
-                append( sb, &quot;Base directory of the project.&quot;, 3 );
-                append( sb, &quot;Expression: ${basedir}&quot;, 3 );
-                append( sb, &quot;&quot;, 0 );
-
-                append( sb, &quot;buildDirectory&quot;, 2 );
-                append( sb, &quot;Directory containing the build files.&quot;, 3 );
-                append( sb, &quot;Expression: ${project.build.directory}&quot;, 3 );
-                append( sb, &quot;&quot;, 0 );
-
-                append( sb, &quot;play2Home&quot;, 2 );
-                append( sb, &quot;The PLAY2_HOME path is taken from this setting, if not found as a Java system property (-DPLAY2_HOME). Refers to the PLAY2_HOME environment variable by default. So that means that the PLAY2_HOME can be given using:\n1.\tA system variable defined by the system or with -DPLAY2_HOME=...\n2.\tThe play2Home configuration property\n3.\tThe PLAY2_HOME environment property\n&quot;, 3 );
-                append( sb, &quot;Expression: ${env.PLAY2_HOME}&quot;, 3 );
-                append( sb, &quot;&quot;, 0 );
-
-                append( sb, &quot;skip (Default: false)&quot;, 2 );</pre></div></td></tr></table><table border="0" class="table table-striped"><tr class="a"><th>File</th><th>Line</th></tr><tr class="b"><td>de/akquinet/innovation/play/maven/HelpMojo.java</td><td><a href="./xref/de/akquinet/innovation/play/maven/HelpMojo.html#84">84</a></td></tr><tr class="a"><td>de/akquinet/innovation/play/maven/HelpMojo.java</td><td><a href="./xref/de/akquinet/innovation/play/maven/HelpMojo.html#124">124</a></td></tr><tr class="b"><td colspan='2'><div><pre>            append( sb, &quot;Compile the Play application&quot;, 1 );
-            append( sb, &quot;&quot;, 0 );
-            if ( detail )
-            {
-                append( sb, &quot;Available parameters:&quot;, 1 );
-                append( sb, &quot;&quot;, 0 );
-
-                append( sb, &quot;baseDirectory&quot;, 2 );
-                append( sb, &quot;Base directory of the project.&quot;, 3 );
-                append( sb, &quot;Expression: ${basedir}&quot;, 3 );
-                append( sb, &quot;&quot;, 0 );
-
-                append( sb, &quot;buildDirectory&quot;, 2 );
-                append( sb, &quot;Directory containing the build files.&quot;, 3 );
-                append( sb, &quot;Expression: ${project.build.directory}&quot;, 3 );
-                append( sb, &quot;&quot;, 0 );
-
-                append( sb, &quot;play2Home&quot;, 2 );</pre></div></td></tr></table></div>
+            <div class="section"><h2>CPD Results<a name="CPD_Results"></a></h2><p>The following document contains the results of PMD's  <a class="externalLink" href="http://pmd.sourceforge.net/cpd.html">CPD</a> 4.2.5.</p></div><div class="section"><h2>Duplications<a name="Duplications"></a></h2><p>CPD found no problems in your source code.</p></div>
                   </div>
             </div>
           </div>

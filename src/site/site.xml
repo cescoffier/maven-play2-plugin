@@ -22,7 +22,7 @@
     <skin>
         <groupId>org.apache.maven.skins</groupId>
         <artifactId>maven-fluido-skin</artifactId>
-        <version>1.2.1</version>
+        <version>1.3.0</version>
     </skin>
     <custom>
         <fluidoSkin>
@@ -48,6 +48,7 @@
             <item name="Quickstart" href="quickstart.html"/>
             <item name="Using the Maven Structure" href="structure.html"/>
             <item name="Play2 Modules" href="module.html"/>
+            <item name="Building a War file" href="war.html"/>
             <item name="FAQ" href="faq.html"/>
         </menu>
         <menu ref="reports" />

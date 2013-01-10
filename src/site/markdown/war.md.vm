@@ -1,0 +1,81 @@
+Building Web Archive (War)
+==========================
+
+The plugin is able to generate a standard _war_ file embedding your Play application. However this support is
+**experimental**
+. Please report bugs and issues.
+
+The plugin generates a war file automatically, that can be deployed on application server implementing the servlet 3
+.0+ specification. It uses the Play2 - War bridge made by [Damien Lecan](https://github
+.com/dlecan/play2-war-plugin).
+
+Packaging the war file
+----------------------
+
+The war file is built by default with:
+
+    mvn clean package
+
+You can disable the War packaging by setting the `buildWar` property to false in the plugin configuration.
+
+    <buildWar>false</buildWar>
+
+
+Embedding additional files
+--------------------------
+
+The additional files added in the configuration are embedded at the root of the war file:
+
+    <project>
+        [...]
+        <packaging>play2</packaging>
+        [...]
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>${project.artifactId}</artifactId>
+                    <version>${project.version}</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <additionalFiles>
+                            <additionalFile>${basedir}/your-file</additionalFile>
+                        </additionalFiles>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </build>
+        [...]
+    </project>
+
+How to deploy in my favorite application server ?
+-------------------------------------------------
+
+**Play framework 2.0.x applications must be deployed at root context.**
+Deployment in a sub-context is a known limitation which is fixed for Play 2.1 (still in development, but announced).
+
+The best way to deploy at root context is to include a configuration file into the WAR file to indicate to your application server where to deploy the application.
+
+**Tomcat 7 : how to deploy at root context ?**
+
+Rename the generated war *ROOT.war* before deployment.
+
+**Jetty 8/9 : how to deploy at root context ?**
+
+Rename the generated war *ROOT.war* before deployment.
+
+**JBoss 7.1.x : how to deploy at root context**
+
+First, disable default welcome page in ``standalone/configuration/standalone.xml`` by changing
+``enable-welcome-root="true"`` to ``enable-welcome-root="false"``:
+
+    <subsystem xmlns="urn:jboss:domain:web:1.0" default-virtual-server="default-host">
+        <connector name="http" scheme="http" protocol="HTTP/1.1" socket-binding="http"/>
+        <virtual-server name="default-host" enable-welcome-root="true">
+            <alias name="localhost" />
+            <alias name="example.com" />
+        </virtual-server>
+    </subsystem>
+
+Then rename the generated war *ROOT.war* before deployment.
+

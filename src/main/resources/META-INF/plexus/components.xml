@@ -40,7 +40,8 @@
                     </process-test-resources>
                     <test>de.akquinet.innovation.play2:play2-maven-plugin:test</test>
                     <package>
-                        de.akquinet.innovation.play2:play2-maven-plugin:package
+                        de.akquinet.innovation.play2:play2-maven-plugin:package,
+                        de.akquinet.innovation.play2:play2-maven-plugin:package-war
                     </package>
                     <install>
                         org.apache.maven.plugins:maven-install-plugin:install

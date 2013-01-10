@@ -21,10 +21,9 @@ public class Play2DebugMojo extends AbstractPlay2Mojo {
 
         CommandLine cmdLine = CommandLine.parse(line);
 
-        String[] args = {"debug", "run"};
-
+        cmdLine.addArgument("debug");
         cmdLine.addArguments(getPlay2Arguments(), false);
-        cmdLine.addArguments(args);
+        cmdLine.addArgument("run");
         DefaultExecutor executor = new DefaultExecutor();
 
         // As where not linked to a project, we can't set the working directory.

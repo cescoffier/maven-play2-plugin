@@ -17,7 +17,6 @@ package de.akquinet.innovation.play.maven;
 
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
-import org.apache.commons.exec.ExecuteWatchdog;
 import org.apache.maven.plugin.MojoExecutionException;
 
 import java.io.IOException;
@@ -39,6 +38,7 @@ public class Play2RunMojo
         String line = getPlay2().getAbsolutePath();
 
         CommandLine cmdLine = CommandLine.parse(line);
+        cmdLine.addArguments(getPlay2Arguments(), false);
         cmdLine.addArgument("run");
         DefaultExecutor executor = new DefaultExecutor();
 

@@ -23,9 +23,7 @@ import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.MavenProjectHelper;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * Common parent of all Play 2 Mojo
@@ -96,10 +94,18 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
 
     public static final String ENV_PLAY2_HOME = "PLAY2_HOME";
 
+    public static final String PLAY2_ARG_FORMAT = "-D%s=%s";
+
     /**
      * Stored the play 2 executable once found to avoid multiple searches.
      */
     private File play2executable;
+
+    /**
+     * Allows customization of the play execution System properties.
+     * @parameter
+     */
+    Properties play2SystemProperties = new Properties();
 
     /**
      * Gets the specified <tt>PLAY2_HOME</tt> location.
@@ -296,5 +302,17 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
      */
     public File getBuildDirectory() {
         return buildDirectory;
+    }
+
+    /**
+     *
+     * @return the array of play2 run arguments
+     */
+    public String[] getPlay2Arguments() {
+        Set<String> args = new HashSet<String>();
+        for (Map.Entry<Object, Object> entry : play2SystemProperties.entrySet()) {
+            args.add(String.format(PLAY2_ARG_FORMAT, entry.getKey(), entry.getValue()));
+        }
+        return args.toArray(new String[0]);
     }
 }

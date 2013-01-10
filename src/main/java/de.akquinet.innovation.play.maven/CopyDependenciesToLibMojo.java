@@ -119,10 +119,12 @@ public class CopyDependenciesToLibMojo
         public PlayCopyDependenciesMojo() {
             super();
             project = CopyDependenciesToLibMojo.this.project;
-            setFactory(factory);
-            setResolver(resolver);
-            setArtifactCollector(artifactCollector);
-            setArtifactMetadataSource(artifactMetadataSource);
+            setFactory(CopyDependenciesToLibMojo.this.factory);
+            setResolver(CopyDependenciesToLibMojo.this.resolver);
+            setArtifactCollector(CopyDependenciesToLibMojo.this.artifactCollector);
+            setArtifactMetadataSource(CopyDependenciesToLibMojo.this.artifactMetadataSource);
+            setLocal(CopyDependenciesToLibMojo.this.local);
+            setRemoteRepos(CopyDependenciesToLibMojo.this.remoteRepos);
             setLocal(local);
             setRemoteRepos(remoteRepos);
             setOutputDirectory(lib);

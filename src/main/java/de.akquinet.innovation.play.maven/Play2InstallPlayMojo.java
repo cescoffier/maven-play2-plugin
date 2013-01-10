@@ -23,6 +23,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.codehaus.plexus.archiver.ArchiverException;
 import org.codehaus.plexus.archiver.UnArchiver;
 import org.codehaus.plexus.archiver.manager.ArchiverManager;
 import org.codehaus.plexus.archiver.manager.NoSuchArchiverException;
@@ -134,6 +135,9 @@ public class Play2InstallPlayMojo
             }
             throw new MojoExecutionException( "Can't auto install Play! " + play2version + " in "
                                               + play2basedir, ex );
+        } catch (ArchiverException e) {
+            throw new MojoExecutionException( "Cannot unzip Play " + play2version + " in "
+                    + play2basedir, e );
         } finally {
             try {
                 if ( zipFile.exists() ) {

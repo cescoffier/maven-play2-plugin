@@ -51,6 +51,18 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
     MavenSession session;
 
     /**
+     * Directory containing the build files.
+     * @parameter expression="${project.build.directory}"
+     */
+    File buildDirectory;
+
+    /**
+     * Base directory of the project.
+     * @parameter expression="${basedir}"
+     */
+    File baseDirectory;
+
+    /**
      * Maven ProjectHelper.
      *
      * @component
@@ -270,5 +282,19 @@ public abstract class AbstractPlay2Mojo extends AbstractMojo {
         
         getLog().debug("Environment built : " + env);
         return env;
+    }
+
+    /**
+     * @return the maven project
+     */
+    public MavenProject getProject() {
+        return project;
+    }
+
+    /**
+     * @return the build directory (generally <tt>target</tt>)
+     */
+    public File getBuildDirectory() {
+        return buildDirectory;
     }
 }

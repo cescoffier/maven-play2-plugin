@@ -71,6 +71,7 @@ public class Play2PackageMojo
     /**
      * Enables or disables the deletion of the <tt>dist</tt> folder after having packaged the application and copied the
      * distribution file to <tt>target</tt>. It allows keeping the base directory cleaner.
+     *
      * @parameter default-value=true
      */
     boolean deleteDist;
@@ -79,6 +80,7 @@ public class Play2PackageMojo
      * Allows customization of the play packaging. The files specified in this attribute will get added to the distribution
      * zip file. This allows, for example, to write your own start script and have it packaged in the distribution.
      * This is done post-packaging by the play framework.
+     *
      * @parameter
      */
     List<String> additionalFiles = new ArrayList<String>();
@@ -128,11 +130,9 @@ public class Play2PackageMojo
 
                 zipFile.addFiles(filesToAdd, parameters);
             }
-        }
-        catch (ZipException e) {
+        } catch (ZipException e) {
             throw new MojoExecutionException("Cannot add files to zipfile: " + distributionFile, e);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new MojoExecutionException("Cannot add files to zipfile: " + distributionFile, e);
         }
     }

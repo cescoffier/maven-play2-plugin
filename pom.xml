@@ -13,7 +13,8 @@
   ~ limitations under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -77,8 +78,8 @@
 
         <contributor>
             <name>Robin Palotai</name>
-            <email />
-            <url />
+            <email/>
+            <url/>
             <organization>EPAM Systems</organization>
             <properties>
                 <github>robinp</github>
@@ -87,19 +88,19 @@
 
         <contributor>
             <name>Sam Spycher</name>
-            <email />
-            <url />
-            <organization />
+            <email/>
+            <url/>
+            <organization/>
             <properties>
                 <github>samspycher</github>
             </properties>
         </contributor>
-        
+
         <contributor>
             <name>Shane Witbeck</name>
-            <email />
+            <email/>
             <url>http://digitalsanctum.com</url>
-            <organization />
+            <organization/>
             <properties>
                 <github>digitalsanctum</github>
             </properties>
@@ -107,9 +108,9 @@
 
         <contributor>
             <name>Alexandre Normand</name>
-            <email />
+            <email/>
             <url>http://heyitsalex.net</url>
-            <organization />
+            <organization/>
             <properties>
                 <github>alexandre-normand</github>
             </properties>
@@ -118,10 +119,11 @@
 
     <properties>
         <mavenVersion>2.2.1</mavenVersion>
+        <mavenArchiverVersion>2.5</mavenArchiverVersion>
         <project.url>http://cescoffier.github.com/maven-play2-plugin/maven/${project.version}</project.url>
         <!-- empty by default, can be set using system props (-Dplay2.home=...)-->
-        <play2.home />
-	    <site.path>maven/snapshot</site.path>
+        <play2.home/>
+        <site.path>maven/snapshot</site.path>
     </properties>
 
     <prerequisites>
@@ -166,6 +168,19 @@
             <artifactId>maven-plugin-api</artifactId>
             <version>${mavenVersion}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-archiver</artifactId>
+            <version>${mavenArchiverVersion}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-utils</artifactId>
+            <version>3.0</version>
+        </dependency>
+
         <!-- Maven dependency plugin  -->
         <dependency>
             <groupId>org.apache.maven.shared</groupId>
@@ -206,6 +221,12 @@
         </dependency>
 
         <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-exec</artifactId>
             <version>1.1</version>
@@ -237,7 +258,33 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- War support -->
+        <dependency>
+            <groupId>com.github.play2war</groupId>
+            <artifactId>play2-war-core-common_2.9.1</artifactId>
+            <version>0.8.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.play2war</groupId>
+            <artifactId>play2-war-core-servlet30_2.9.1</artifactId>
+            <version>0.8.1</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>play2-war-support</id>
+            <url>http://repository-play-war.forge.cloudbees.com/release/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
     <build>
         <resources>
@@ -449,9 +496,9 @@
 
         <profile>
             <id>release</id>
-			<properties>
-				<site.path>maven/release</site.path>
-			</properties>	
+            <properties>
+                <site.path>maven/release</site.path>
+            </properties>
             <build>
                 <plugins>
                     <plugin>

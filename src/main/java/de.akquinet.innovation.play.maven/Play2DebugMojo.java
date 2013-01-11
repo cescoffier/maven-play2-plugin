@@ -22,7 +22,7 @@ public class Play2DebugMojo extends AbstractPlay2Mojo {
         CommandLine cmdLine = CommandLine.parse(line);
 
         cmdLine.addArgument("debug");
-        cmdLine.addArguments(getPlay2Arguments(), false);
+        cmdLine.addArguments(getPlay2SystemPropertiesArguments(), false);
         cmdLine.addArgument("run");
         DefaultExecutor executor = new DefaultExecutor();
 

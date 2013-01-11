@@ -38,7 +38,7 @@ public class Play2RunMojo
         String line = getPlay2().getAbsolutePath();
 
         CommandLine cmdLine = CommandLine.parse(line);
-        cmdLine.addArguments(getPlay2Arguments(), false);
+        cmdLine.addArguments(getPlay2SystemPropertiesArguments(), false);
         cmdLine.addArgument("run");
         DefaultExecutor executor = new DefaultExecutor();
 

@@ -218,3 +218,29 @@ Or register the _install-play_ goal in your _pom.xml_ and use the installed dist
 
 The Maven process must be able to write and execute into _play2basedir_.
 If the requested version is already installed nothing gets downloaded.
+
+Adding system properties to play2 execution process
+------------------
+
+    <project>
+        [...]
+        <packaging>play2</packaging>
+        [...]
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>${project.artifactId}</artifactId>
+                    <version>${project.version}</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                      <play2SystemProperties>
+                        <property><name>hello</name><value>world</value></property>
+                        <property><name>javax.net.debug</name><value>ssl</value></property>
+                      </play2SystemProperties>
+                   </configuration>
+                </plugin>
+            </plugins>
+        </build>
+        [...]
+    </project>

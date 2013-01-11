@@ -68,6 +68,7 @@ public class Play2TestMojo
         String line = getPlay2().getAbsolutePath();
 
         CommandLine cmdLine = CommandLine.parse(line);
+        cmdLine.addArguments(getPlay2SystemPropertiesArguments(), false);
         cmdLine.addArgument("test");
         DefaultExecutor executor = new DefaultExecutor();
 

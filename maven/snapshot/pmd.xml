@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd version="4.2.5" timestamp="2013-01-10T16:10:44.733">
+<pmd version="4.2.5" timestamp="2013-01-12T09:09:36.068">
 <file name="/Users/jenkins/jobs/play2-maven-plugin - Site Deploy/workspace/src/main/java/de.akquinet.innovation.play.maven/Play2CleanMojo.java">
 <violation beginline="41" endline="41" begincolumn="18" endcolumn="20" rule="UnusedPrivateField" ruleset="Unused Code Rules" package="de.akquinet.innovation.play.maven" class="Play2CleanMojo" variable="lib" externalInfoUrl="http://pmd.sourceforge.net/rules/unusedcode.html#UnusedPrivateField" priority="3">
 Avoid unused private fields such as 'lib'.
@@ -37,9 +37,6 @@ Avoid empty catch blocks
 </violation>
 </file>
 <file name="/Users/jenkins/jobs/play2-maven-plugin - Site Deploy/workspace/src/main/java/de.akquinet.innovation.play.maven/Play2RunMojo.java">
-<violation beginline="20" endline="20" begincolumn="1" endcolumn="47" rule="UnusedImports" ruleset="Import Statement Rules" package="de.akquinet.innovation.play.maven" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
-Avoid unused imports such as 'org.apache.commons.exec.ExecuteWatchdog'
-</violation>
 <violation beginline="51" endline="53" begincolumn="11" endcolumn="9" rule="EmptyCatchBlock" ruleset="Basic Rules" package="de.akquinet.innovation.play.maven" class="Play2RunMojo" method="execute" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyCatchBlock" priority="3">
 Avoid empty catch blocks
 </violation>

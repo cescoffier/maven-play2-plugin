@@ -94,7 +94,7 @@ public class Play2InstallPlayMojo
         File zipFile = new File( play2basedirFile, "play-" + play2version + ".zip" );
 
         try {
-            URL zipUrl = new URL( "http://downloads.typesafe.com/play/2.1.0/play-" + play2version + ".zip" );
+            URL zipUrl = new URL( getDownloadUrlForVersion(play2version) );
             FileUtils.forceMkdir( play2basedirFile );
 
             // Download
@@ -149,4 +149,15 @@ public class Play2InstallPlayMojo
         }
     }
 
+    /**
+     * @param version Play! version.
+     * @return The download url for a specific version of Play!.
+     */
+    private String getDownloadUrlForVersion(String version) {
+        if (version.startsWith("2.0")) {
+            return "http://downloads.typesafe.com/releases/play-" + version + ".zip";
+        } else {
+            return  "http://downloads.typesafe.com/play/" + version + "/play-" + version + ".zip";
+        }
+    }
 }

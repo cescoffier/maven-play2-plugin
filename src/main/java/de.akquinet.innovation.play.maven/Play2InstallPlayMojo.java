@@ -94,8 +94,7 @@ public class Play2InstallPlayMojo
         File zipFile = new File( play2basedirFile, "play-" + play2version + ".zip" );
 
         try {
-
-            URL zipUrl = new URL( "http://download.playframework.org/releases/play-" + play2version + ".zip" );
+            URL zipUrl = new URL( "http://downloads.typesafe.com/play/2.1.0/play-" + play2version + ".zip" );
             FileUtils.forceMkdir( play2basedirFile );
 
             // Download

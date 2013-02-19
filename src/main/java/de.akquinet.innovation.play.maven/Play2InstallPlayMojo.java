@@ -98,7 +98,7 @@ public class Play2InstallPlayMojo
             // New download URL pattern starting from 2.1.0, the 2.1-RC* versions use the old URL pattern.
             // See https://groups.google.com/forum/#!topic/play-framework/SKOXG1YRKa8
             URL zipUrl;
-            if( play2version.startWith( "2.0" ) || play2version.startWith( "2.1-RC" ) ) {
+            if( play2version.startsWith( "2.0" ) || play2version.startsWith( "2.1-RC" ) ) {
                 zipUrl = new URL( "http://downloads.typesafe.com/releases/play-" + play2version + ".zip" );
             } else {
                 zipUrl = new URL( "http://downloads.typesafe.com/play/" + play2version  + "/play-" + play2version + ".zip" );

@@ -28,35 +28,39 @@ At the root of the created project, create a _pom.xml_ file with the following c
 
         <packaging>play2</packaging>
 
-        <repositories>
-            <repository>
-                <id>typesafe</id>
-                <url>http://repo.typesafe.com/typesafe/releases/</url>
-            </repository>
-        </repositories>
+        <properties>
+            <play.version>2.1.0</play.version>
+        </properties>
 
-        <dependencies>
-            <!--
-            Add your dependencies here (modules, libraries...).
-            Dependencies in the compile scope will be embedded within the application.
-            -->
+            <repositories>
+                <repository>
+                    <id>typesafe</id>
+                    <url>http://repo.typesafe.com/typesafe/releases/</url>
+                </repository>
+            </repositories>
+
+            <dependencies>
+                <!--
+                Add your dependencies here (modules, libraries...).
+                Dependencies in the compile scope will be embedded within the application.
+                -->
 
 
-            <!-- Play Framework Dependencies -->
-            <dependency>
-                <groupId>play</groupId>
-                <artifactId>play_2.9.1</artifactId>
-                <version>2.0.4</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>play</groupId>
-                <artifactId>play-test_2.9.1</artifactId>
-                <version>2.0.4</version>
-                <scope>provided</scope>
-            </dependency>
+                <!-- Play Framework Dependencies -->
+                <dependency>
+                    <groupId>play</groupId>
+                    <artifactId>play_2.10</artifactId>
+                    <version>${play.version}</version>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>play</groupId>
+                    <artifactId>play-test_2.10</artifactId>
+                    <version>${play.version}</version>
+                    <scope>provided</scope>
+                </dependency>
 
-        </dependencies>
+            </dependencies>
 
         <build>
             <!-- Play source directory -->

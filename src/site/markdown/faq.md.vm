@@ -93,6 +93,39 @@ with
     exit /b %errorlevel%
     endlocal
 
+<a class="entry" name="Cloudbee"></a>
+How to build a Play application with the plugin on Cloudbee
+-----------------------------------------------------------
+
+Cloudbee provides a great service to do continuous integration. However, using the plugin on a Maven build on
+Cloudbee, you are going to encounter two issues
+
+* _play2_ is not installed : Cloudbee hosts do not contain an installation of Play 2.
+* _javac_ is not found: The problem comes from the _PATH_ that does not contain the _javac_ executable.
+
+To fix the issue, add a build step (*pre steps*) before Maven build step executing a shell command:
+
+    # Install play 2.0.4
+    mvn ${project.groupId}:${project.artifactId}:install-play -Dplay2version=2.0.4 -Dplay2basedir=${HOME}/opt
+
+    # Configure SBT to find javac
+    mkdir -p ~/.sbt
+    echo "javaHome := Some(file(\"`echo $JAVA_HOME`\"))" > ~/.sbt/global.sbt
+    cat ~/.sbt/global.sbt
+
+Adjust the first command with the Play version you want. The play installation step does not reinstall the framework if it is already installed.
+
+Then you must instruct Maven to find the right Play version. In the *Goals and Options* textbox write:
+
+    clean install -DPLAY2_HOME=${HOME}/opt/play-2.0.4
+
+Again, don't forget to update the play version with the version you chose in the script.
+
+The final configuration should be like:
+
+<img src="images/faq-cloudbee.png" alt="Missing view in Play 2 Controller" style="margin: 0 auto;
+display:block"/>
+
 
 <!-- SCRIPT generating the TOC -->
 <script>
@@ -105,3 +138,5 @@ with
         list.append(item); 
     });
 </script>
+
+

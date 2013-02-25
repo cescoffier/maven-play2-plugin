@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd version="4.2.5" timestamp="2013-01-12T09:09:36.068">
+<pmd version="4.2.5" timestamp="2013-02-25T08:55:17.269">
 <file name="/Users/jenkins/jobs/play2-maven-plugin - Site Deploy/workspace/src/main/java/de.akquinet.innovation.play.maven/Play2CleanMojo.java">
 <violation beginline="41" endline="41" begincolumn="18" endcolumn="20" rule="UnusedPrivateField" ruleset="Unused Code Rules" package="de.akquinet.innovation.play.maven" class="Play2CleanMojo" variable="lib" externalInfoUrl="http://pmd.sourceforge.net/rules/unusedcode.html#UnusedPrivateField" priority="3">
 Avoid unused private fields such as 'lib'.

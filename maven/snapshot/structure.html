@@ -214,8 +214,11 @@ resourceDirectory in Compile &lt;&lt;= baseDirectory / "src/main/conf"
 <p>You can move the <em>application.conf</em>, <em>routes</em> and others configuration files into this folder.</p>
 
 <div class="alert alert-info">
-  The <em>play</em> executable is checking for the existence of <em>conf/application.conf</em> to detect whether or not the folder
+  Before the 2.1.0 version of Play, the <em>play</em> executable is checking for the existence of <em>conf/application
+  .conf</em> to detect whether or not the folder
   contains a Play application. So, you still need a <em>conf/application.conf</em> file, but this file can be empty.
+
+  <p>This is not required if you are using play 2.1.0+</p>
 </div>
 
 <h2>Static Assets</h2>

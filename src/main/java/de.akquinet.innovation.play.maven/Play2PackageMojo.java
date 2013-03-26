@@ -28,6 +28,8 @@ import org.apache.maven.plugin.MojoExecutionException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Package the Play application.
@@ -88,8 +90,16 @@ public class Play2PackageMojo
 
     private File moveApplicationPackageToTarget() throws MojoExecutionException {
         File target = new File(project.getBasedir(), "target");
-        File[] files = FileUtils.convertFileCollectionToFileArray(
+        File[] allFiles = FileUtils.convertFileCollectionToFileArray(
                 FileUtils.listFiles(target, new PackageFileFilter(), new PrefixFileFilter("scala-")));
+        
+        List<File> filesList = new LinkedList<File>();
+        for (File file : allFiles) {
+        	if (!file.getName().endsWith("-javadoc.jar") && !file.getName().endsWith("-sources.jar"))
+        		filesList.add(file);
+        }
+        File[] files = filesList.toArray(new File[filesList.size()]);
+        
         if (files.length == 0) {
             throw new MojoExecutionException("Cannot find packaged file");
         } else if (files.length > 1) {

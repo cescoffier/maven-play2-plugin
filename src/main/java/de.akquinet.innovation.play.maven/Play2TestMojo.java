@@ -20,6 +20,7 @@ import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.ExecuteWatchdog;
 import org.apache.maven.plugin.MojoExecutionException;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -39,7 +40,6 @@ public class Play2TestMojo
      * @parameter default-value="false" expression="${skipTests}"
      */
     private boolean skipTests;
-
     /**
      * Set this to "true" to bypass unit tests entirely. Its use is NOT RECOMMENDED, especially if you enable it using
      * the "maven.test.skip" property, because maven.test.skip disables both running the tests and compiling the tests.
@@ -48,7 +48,6 @@ public class Play2TestMojo
      * @parameter default-value="false" expression="${maven.test.skip}"
      */
     private boolean skip;
-
     /**
      * Set this to "true" to ignore a failure during testing. Its use is NOT RECOMMENDED, but quite convenient on
      * occasion.
@@ -62,6 +61,11 @@ public class Play2TestMojo
 
         if (isSkipExecution()) {
             getLog().info("Test phase skipped");
+            return;
+        }
+
+        if (noTestFound()) {
+            getLog().info("Test phase skipped - no tests found");
             return;
         }
 
@@ -89,6 +93,38 @@ public class Play2TestMojo
                 throw new MojoExecutionException("Error during compilation", e);
             }
         }
+    }
+
+    /**
+     * Does an educated guess on the existence of tests.
+     * This methods checks that the `test` directory is existing and not empty,
+     * as well as the `src/test/main` directory.
+     *
+     * @return <code>true</code> if no tests are found.
+     */
+    private boolean noTestFound() {
+        File mavenTestDirectory = new File(project.getBuild().getTestSourceDirectory());
+        File playTest = new File(baseDirectory, "test");
+
+        getLog().debug("Searching tests in " + playTest.getAbsolutePath()
+                + " and " + mavenTestDirectory.getAbsolutePath());
+
+        int count = 0;
+        if (playTest.isDirectory()) {
+            String[] names = playTest.list();
+            if (names != null) {
+                count += names.length;
+            }
+        }
+
+        if (mavenTestDirectory.isDirectory()) {
+            String[] names = mavenTestDirectory.list();
+            if (names != null) {
+                count += names.length;
+            }
+        }
+
+        return count == 0;
     }
 
     protected boolean isSkipExecution() {

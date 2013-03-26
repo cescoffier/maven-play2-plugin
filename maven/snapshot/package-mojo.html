@@ -205,6 +205,22 @@ artifact to this project. This option has no impact if the
 distribution is not built.<br /><b>Default value is</b>: <tt>true</tt>.</td>
           </tr>
           <tr class="b">
+            <td><b><a href="#attachJavadoc">attachJavadoc</a></b></td>
+            <td><tt>boolean</tt></td>
+            <td><tt>-</tt></td>
+            <td>Enables or disables the attachment of the -javadoc artifact. This
+artifact is created during the play distribution packaging process.
+If set to true, and if the artifact is not found, the build fails.<br /><b>Default value is</b>: <tt>false</tt>.</td>
+          </tr>
+          <tr class="a">
+            <td><b><a href="#attachSources">attachSources</a></b></td>
+            <td><tt>boolean</tt></td>
+            <td><tt>-</tt></td>
+            <td>Enables or disables the attachment of the -source artifact. This
+artifact is created during the play distribution packaging process.
+If set to true, and if the artifact is not found, the build fails.<br /><b>Default value is</b>: <tt>false</tt>.</td>
+          </tr>
+          <tr class="b">
             <td><b><a href="#baseDirectory">baseDirectory</a></b></td>
             <td><tt>File</tt></td>
             <td><tt>-</tt></td>
@@ -290,6 +306,22 @@ distribution is not built.</div>
           <li><b>Type</b>: <tt>boolean</tt></li>
           <li><b>Required</b>: <tt>No</tt></li>
           <li><b>Default</b>: <tt>true</tt></li>
+        </ul><hr /><p><b><a name="attachJavadoc">attachJavadoc</a>:</b></p>
+        <div>Enables or disables the attachment of the -javadoc artifact. This
+artifact is created during the play distribution packaging process.
+If set to true, and if the artifact is not found, the build fails.</div>
+        <ul>
+          <li><b>Type</b>: <tt>boolean</tt></li>
+          <li><b>Required</b>: <tt>No</tt></li>
+          <li><b>Default</b>: <tt>false</tt></li>
+        </ul><hr /><p><b><a name="attachSources">attachSources</a>:</b></p>
+        <div>Enables or disables the attachment of the -source artifact. This
+artifact is created during the play distribution packaging process.
+If set to true, and if the artifact is not found, the build fails.</div>
+        <ul>
+          <li><b>Type</b>: <tt>boolean</tt></li>
+          <li><b>Required</b>: <tt>No</tt></li>
+          <li><b>Default</b>: <tt>false</tt></li>
         </ul><hr /><p><b><a name="baseDirectory">baseDirectory</a>:</b></p>
         <div>Base directory of the project.</div>
         <ul>

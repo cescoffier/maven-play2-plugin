@@ -206,6 +206,11 @@ public class PlayPackageMojoTest {
         mojo.buildDist = true;
         mojo.classifier = "play";
         mojo.buildDirectory = new File(baseDir, "target");
+
+        // Enable attachment of sources and javadoc
+        mojo.attachJavadoc = true;
+        mojo.attachSources = true;
+
         mojo.setLog(new SystemStreamLog());
         Build build = mock(Build.class);
         Artifact artifact = mock(Artifact.class);
@@ -224,10 +229,16 @@ public class PlayPackageMojoTest {
         File target = new File(baseDir, "target");
         File dist = new File(target, "app-1.0.0-play.zip");
         File pack = new File(target, "app-1.0.0-play.jar");
+
+        File sources = new File(target, "app-1.0.0-sources.jar");
+        File javadoc = new File(target, "app-1.0.0-javadoc.jar");
+
         assertThat(dist).exists();
         assertThat(pack).exists();
         verify(mojo.projectHelper).attachArtifact(mojo.project, "jar", "play", pack);
         verify(mojo.projectHelper).attachArtifact(mojo.project, "zip", "play", dist);
+        verify(mojo.projectHelper).attachArtifact(mojo.project, "jar", "javadoc", javadoc);
+        verify(mojo.projectHelper).attachArtifact(mojo.project, "jar", "sources", sources);
     }
 
     @Test

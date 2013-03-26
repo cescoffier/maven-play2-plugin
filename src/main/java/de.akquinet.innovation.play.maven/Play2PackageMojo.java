@@ -80,6 +80,22 @@ public class Play2PackageMojo
      * @parameter
      */
     List<String> additionalFiles = new ArrayList<String>();
+    /**
+     * Enables or disables the attachment of the -javadoc artifact.
+     * This artifact is created during the play distribution packaging process.
+     * If set to true, and if the artifact is not found, the build fails.
+     *
+     * @parameter default-value=false
+     */
+    boolean attachJavadoc;
+    /**
+     * Enables or disables the attachment of the -source artifact.
+     * This artifact is created during the play distribution packaging process.
+     * If set to true, and if the artifact is not found, the build fails.
+     *
+     * @parameter default-value=false
+     */
+    boolean attachSources;
 
     public void execute()
             throws MojoExecutionException {
@@ -93,6 +109,9 @@ public class Play2PackageMojo
         if (buildDist) {
             packageDistribution();
             dist = moveDistributionArtifactToTarget();
+
+            // The javadoc and source files are created during the distribution construction.
+            moveJavadocAndSourcesArtifactsToTarget();
 
             if (!additionalFiles.isEmpty()) {
                 packageAdditionalFiles(additionalFiles, dist);
@@ -137,26 +156,31 @@ public class Play2PackageMojo
         File target = getBuildDirectory();
         File[] files = FileUtils.convertFileCollectionToFileArray(
                 FileUtils.listFiles(target, new PackageFileFilter(), new PrefixFileFilter("scala-")));
-        if (files.length == 0) {
-            throw new MojoExecutionException("Cannot find packaged file");
-        } else if (files.length > 1) {
-            getLog().error("Cannot find the packaged file - Too many matches");
-            for (File f : files) {
-                getLog().error("\t " + f.getAbsolutePath());
+
+        File mainJar = null;
+        for (File file : files) {
+            // We need to distinguish which file is the main artifacts.
+            // We filter out -sources and -javadoc files.
+            if (! file.getName().endsWith("-javadoc.jar")
+                    && ! file.getName().endsWith("-sources.jar")) {
+                mainJar = file;
             }
-            throw new MojoExecutionException("Cannot find packaged file : " + files.length + " matches");
+        }
+
+        if (mainJar == null) {
+            throw new MojoExecutionException("Cannot find packaged file");
         }
 
         try {
             if (StringUtils.isBlank(classifier)) {
                 File out = new File(target, project.getBuild().getFinalName() + ".jar");
                 getLog().info("Copying " + files[0].getName() + " to " + out.getName());
-                FileUtils.copyFile(files[0], out);
+                FileUtils.copyFile(mainJar, out);
                 return out;
             } else {
                 File out = new File(target, project.getBuild().getFinalName() + "-" + classifier + ".jar");
                 getLog().info("Copying " + files[0].getName() + " to " + out.getName());
-                FileUtils.copyFile(files[0], out);
+                FileUtils.copyFile(mainJar, out);
                 return out;
             }
         } catch (IOException e) {
@@ -255,7 +279,40 @@ public class Play2PackageMojo
         return out;
     }
 
-    private void attachArtifactsToProject(File app, File dist) {
+    private void moveJavadocAndSourcesArtifactsToTarget() throws MojoExecutionException {
+        File sourceJar = null;
+        File javadocJar = null;
+
+        File target = getBuildDirectory();
+        File[] files = FileUtils.convertFileCollectionToFileArray(
+                FileUtils.listFiles(target, new PackageFileFilter(), new PrefixFileFilter("scala-")));
+
+        for (File file : files) {
+            // We need to select the right file.
+            if (file.getName().endsWith("-sources.jar")) {
+                sourceJar = file;
+            } else if (file.getName().endsWith("-javadoc.jar")) {
+                javadocJar = file;
+            }
+        }
+        try {
+            if (sourceJar != null) {
+                getLog().info("Artifact containing sources found - copying to target");
+                File out = new File(target, project.getBuild().getFinalName() + "-sources.jar");
+                FileUtils.copyFile(sourceJar, out);
+            }
+
+            if (javadocJar != null) {
+                getLog().info("Artifact containing javadoc found - copying to target");
+                File out = new File(target, project.getBuild().getFinalName() + "-javadoc.jar");
+                FileUtils.copyFile(javadocJar, out);
+            }
+        } catch (IOException e) {
+            throw new MojoExecutionException("Can't copy the javadoc and sources file to the target folder", e);
+        }
+    }
+
+    private void attachArtifactsToProject(File app, File dist) throws MojoExecutionException {
         Artifact artifact = project.getArtifact();
 
         if (StringUtils.isBlank(classifier)) {
@@ -266,6 +323,22 @@ public class Play2PackageMojo
 
         if (buildDist && attachDist) {
             projectHelper.attachArtifact(project, "zip", classifier, dist);
+        }
+
+        if (attachJavadoc) {
+            File javadoc = new File(getBuildDirectory(), project.getBuild().getFinalName() + "-javadoc.jar");
+            if (! javadoc.isFile()) {
+                throw new MojoExecutionException("Javadoc attachment enabled, but the artifact is not found");
+            }
+            projectHelper.attachArtifact(project, "jar", "javadoc", javadoc);
+        }
+
+        if (attachSources) {
+            File sources = new File(getBuildDirectory(), project.getBuild().getFinalName() + "-sources.jar");
+            if (! sources.isFile()) {
+                throw new MojoExecutionException("Sources attachment enabled, but the artifact is not found");
+            }
+            projectHelper.attachArtifact(project, "jar", "sources", sources);
         }
 
     }

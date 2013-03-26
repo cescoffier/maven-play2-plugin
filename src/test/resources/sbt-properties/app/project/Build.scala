@@ -1,6 +1,6 @@
 import sbt._
 import Keys._
-import PlayProject._
+import play.Project._
 
 object ApplicationBuild extends Build {
 
@@ -19,7 +19,7 @@ object ApplicationBuild extends Build {
     // Add your project dependencies here,
   )
 
-  val main = PlayProject(appName, appVersion, appDependencies, mainLang = JAVA).settings(
+  val main = play.Project(appName, appVersion, appDependencies).settings(
     // Target folder
     target <<= baseDirectory / "target",
 

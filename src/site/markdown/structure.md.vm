@@ -70,6 +70,15 @@ Then open the _route_ file and change the reference to _/public_ to:
     # Map static resources from the /src/main/resources folder to the /assets URL path
     GET     /assets/*file               controllers.Assets.at(path="/src/main/resources", file)
 
+Distribution directory
+----------------------
+
+Set the directory where the distribution is built with:
+
+    distDirectory <<= baseDirectory / "target/dist",
+
+**However**, only `target/dist` is supported by the plugin.
+
 Unmanaged Dependencies
 ----------------------
 
@@ -98,7 +107,7 @@ Then, open the project _pom.xml_ file and change the ${project.artifactId} confi
 What can't be adapted right now
 -------------------------------
 
-* The _dist_ folder can be set, but this settings is ignored by Play. It should be fixed in Play 2.1.
+* The _dist_ folder can be set with play 2.0.x. It is fixed in Play 2.1.
 
 
 

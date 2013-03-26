@@ -61,6 +61,7 @@ public class PlayPackageMojoTest {
         mojo.attachDist = true;
         mojo.buildDist = true;
         mojo.deleteDist = true;
+        mojo.buildDirectory = new File(baseDir, "target");
         mojo.setLog(new SystemStreamLog());
         Build build = mock(Build.class);
         Artifact artifact = mock(Artifact.class);
@@ -110,6 +111,7 @@ public class PlayPackageMojoTest {
         mojo.attachDist = true;
         mojo.buildDist = true;
         mojo.deleteDist = false;
+        mojo.buildDirectory = new File(baseDir, "target");
         mojo.setLog(new SystemStreamLog());
         Build build = mock(Build.class);
         Artifact artifact = mock(Artifact.class);
@@ -159,6 +161,7 @@ public class PlayPackageMojoTest {
         mojo.attachDist = true;
         mojo.buildDist = true;
         mojo.deleteDist = false;
+        mojo.buildDirectory = new File(baseDir, "target");
         mojo.additionalFiles.add("src/test/resources/AdditionalFile.txt");
         mojo.setLog(new SystemStreamLog());
         Build build = mock(Build.class);
@@ -202,6 +205,7 @@ public class PlayPackageMojoTest {
         mojo.attachDist = true;
         mojo.buildDist = true;
         mojo.classifier = "play";
+        mojo.buildDirectory = new File(baseDir, "target");
         mojo.setLog(new SystemStreamLog());
         Build build = mock(Build.class);
         Artifact artifact = mock(Artifact.class);
@@ -243,6 +247,7 @@ public class PlayPackageMojoTest {
         mojo.attachDist = true;
         mojo.buildDist = true;
         mojo.classifier = "play";
+        mojo.buildDirectory = new File(baseDir, "target");
         mojo.setLog(new SystemStreamLog());
         Build build = mock(Build.class);
         Artifact artifact = mock(Artifact.class);
@@ -283,6 +288,7 @@ public class PlayPackageMojoTest {
         mojo.projectHelper = mock(MavenProjectHelper.class);
         mojo.attachDist = false;
         mojo.buildDist = false;
+        mojo.buildDirectory = new File(baseDir, "target");
         mojo.setLog(new SystemStreamLog());
         Build build = mock(Build.class);
         Artifact artifact = mock(Artifact.class);
@@ -323,6 +329,7 @@ public class PlayPackageMojoTest {
         mojo.projectHelper = mock(MavenProjectHelper.class);
         mojo.attachDist = false;
         mojo.buildDist = false;
+        mojo.buildDirectory = new File(baseDir, "target");
         mojo.setLog(new SystemStreamLog());
         Build build = mock(Build.class);
         Artifact artifact = mock(Artifact.class);

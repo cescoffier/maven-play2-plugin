@@ -51,7 +51,6 @@ public class Play2PackageMojo
      * @parameter default-value=""
      */
     String classifier;
-
     /**
      * Enables or disables the packaging of the whole distribution. The distribution is an autonomous archive containing
      * all the files required to run the play application. Play 2 module can disable the distribution packaging.
@@ -59,7 +58,6 @@ public class Play2PackageMojo
      * @parameter default-value=true
      */
     boolean buildDist;
-
     /**
      * Enables or disables the attachment of the distribution file as an artifact to this project.
      * This option has no impact if the distribution is not built.
@@ -67,7 +65,6 @@ public class Play2PackageMojo
      * @parameter default-value=true
      */
     boolean attachDist;
-
     /**
      * Enables or disables the deletion of the <tt>dist</tt> folder after having packaged the application and copied the
      * distribution file to <tt>target</tt>. It allows keeping the base directory cleaner.
@@ -75,7 +72,6 @@ public class Play2PackageMojo
      * @parameter default-value=true
      */
     boolean deleteDist;
-
     /**
      * Allows customization of the play packaging. The files specified in this attribute will get added to the distribution
      * zip file. This allows, for example, to write your own start script and have it packaged in the distribution.
@@ -138,7 +134,7 @@ public class Play2PackageMojo
     }
 
     private File moveApplicationPackageToTarget() throws MojoExecutionException {
-        File target = new File(project.getBasedir(), "target");
+        File target = getBuildDirectory();
         File[] files = FileUtils.convertFileCollectionToFileArray(
                 FileUtils.listFiles(target, new PackageFileFilter(), new PrefixFileFilter("scala-")));
         if (files.length == 0) {
@@ -190,7 +186,6 @@ public class Play2PackageMojo
         }
     }
 
-
     private void packageDistribution() throws MojoExecutionException {
         String line = getPlay2().getAbsolutePath();
 
@@ -213,12 +208,17 @@ public class Play2PackageMojo
     }
 
     private File moveDistributionArtifactToTarget() throws MojoExecutionException {
-        // The artifact is in dist.
+        // The artifact is in dist, this is no more true with play 2.1 as the distribution directory can be customized.
+        // we make the assumption that if dist does not exist, we try in target/dist.
         File dist = new File(project.getBasedir(), "dist");
         if (!dist.exists()) {
-            throw new MojoExecutionException("Can't find the 'dist' directory");
+            getLog().info("The dist directory does not exist, lookup for the distribution file in target/dist");
+            dist = new File(getBuildDirectory(), "dist");
+            if (!dist.isDirectory()) {
+                throw new MojoExecutionException("Cannot find the 'dist' directory, " +
+                        "neither 'dist' nor 'target/dist' exist");
+            }
         }
-
         Collection<File> found = FileUtils.listFiles(dist, new String[]{"zip"}, false);
         if (found.size() == 0) {
             throw new MojoExecutionException("The distribution file was not found in " + dist.getAbsolutePath());
@@ -231,7 +231,7 @@ public class Play2PackageMojo
 
         getLog().info("Distribution file found : " + file.getAbsolutePath());
 
-        File target = new File(project.getBasedir(), "target");
+        File target = getBuildDirectory();
         File out = null;
         if (classifier == null) {
             out = new File(target, project.getBuild().getFinalName() + ".zip");

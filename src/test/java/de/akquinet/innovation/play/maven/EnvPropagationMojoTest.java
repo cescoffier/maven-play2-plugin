@@ -51,6 +51,7 @@ public class EnvPropagationMojoTest {
         mojo.attachDist = true;
         mojo.buildDist = true;
         mojo.deleteDist = false;
+        mojo.buildDirectory = new File(baseDir, "target");
         mojo.setLog(new SystemStreamLog());
         Build build = mock(Build.class);
         Artifact artifact = mock(Artifact.class);

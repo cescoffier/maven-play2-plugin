@@ -17,3 +17,12 @@ def war = new File (basedir, artifactNameWithoutExtension + ".war");
 assert war.exists();
 assert war.canRead();
 
+// check the sources file
+def sources = new File (basedir, artifactNameWithoutExtension + "-sources.jar");
+assert sources.exists();
+assert sources.canRead();
+
+// check the javadoc file
+def javadoc = new File (basedir, artifactNameWithoutExtension + "-javadoc.jar");
+assert javadoc.exists();
+assert javadoc.canRead();

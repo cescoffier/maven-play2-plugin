@@ -54,6 +54,10 @@
                 <artifactId>play2-maven-plugin</artifactId>
                 <version>@project.version@</version>
                 <extensions>true</extensions>
+                <configuration>
+                    <attachJavadoc>true</attachJavadoc>
+                    <attachSources>true</attachSources>
+                </configuration>
             </plugin>
 
             <plugin>

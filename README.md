@@ -1,15 +1,13 @@
-play2-maven-plugin
-==================
+Migration
+=========
 
-The play2-maven-plugin is used to build Play 2 applications using Maven. Basically, it just a wrapper around the _play_
-command. It supports the application compilation, test and packaging.
+The play2-maven-plugin is now part of the OW2 Nanoko project.
 
-It defines the _play2_ packaging type and supports the compilation, the test and the packaging of the application. Dependencies
-are also managed using Maven.
+The new github project is: https://github.com/nanoko-project/maven-play2-plugin
 
 The documentation is available on :
 
-* http://cescoffier.github.com/maven-play2-plugin/maven/release/ for the latest release
-* http://cescoffier.github.com/maven-play2-plugin/maven/snapshot/ for the development version
+* http://nanoko-project.github.com/maven-play2-plugin/maven/release/ for the latest release
+* http://nanoko-project.github.com/maven-play2-plugin/maven/snapshot/ for the development version
 
-The plugin is licensed under the Apache Software License 2.0.
+**This repository is read-only**.

@@ -2,6 +2,15 @@
 Maven Play2 Plugin
 ==================
 
+<div class="alert alert-warning">
+The plugin is now part of the OW2 Nanoko project. The new documentation is available on:
+<ul>
+  <li><a href="http://nanoko-project.github.com/maven-play2-plugin/maven/release/">http://nanoko-project.github.com/maven-play2-plugin/maven/release/</a> for the latest release</li>
+  <li><a href="http://nanoko-project.github.com/maven-play2-plugin/maven/snapshot/">http://nanoko-project.github.com/maven-play2-plugin/maven/snapshot/</a> for the development version</li>
+</ul>
+The new Github project is: https://github.com/nanoko-project/maven-play2-plugin
+</div>
+
 The ${project.artifactId} is used to build Play 2 applications using Maven. Basically, it just a wrapper around the _play_
 command. It supports compilation, testing and packaging of the application.
 
